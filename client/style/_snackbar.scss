@@ -1,0 +1,27 @@
+.snackbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: white;
+    background: #222429;
+    padding: 15px 24px;
+    transform: translateY(100%);
+    transition: all .3s ease 2s;
+
+    i {
+        margin-right: 4px;
+    }
+
+    &.show {
+        transform: translateY(0);
+    }
+
+    &.danger {
+        background-color: #9E1D1D;
+    }
+    
+    &.success {
+        background-color: #1D9E74;
+    }
+}
