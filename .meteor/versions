@@ -22,6 +22,7 @@ cfs:collection@0.5.5
 cfs:collection-filters@0.2.4
 cfs:data-man@0.0.6
 cfs:file@0.1.17
+cfs:gridfs@0.0.33
 cfs:http-methods@0.0.30
 cfs:http-publish@0.0.13
 cfs:power-queue@0.9.11
@@ -64,6 +65,14 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
+jparker:crypto-aes@0.1.0
+jparker:crypto-base64@0.1.0
+jparker:crypto-cipher-core@0.1.1
+jparker:crypto-core@0.1.0
+jparker:crypto-evpkdf@0.1.1
+jparker:crypto-md5@0.1.1
+jparker:crypto-mode@0.1.1
+jparker:crypto-padding@0.1.0
 jquery@1.11.4
 juliancwirko:s-alert@3.1.1
 juliancwirko:s-alert-stackslide@3.1.0
@@ -91,6 +100,7 @@ npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
+pfafman:filesaver@0.2.1
 promise@0.5.0
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.5

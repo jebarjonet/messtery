@@ -41,3 +41,7 @@ accounts-base
 accounts-password
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
+check
+jparker:crypto-aes
+pfafman:filesaver
+cfs:gridfs

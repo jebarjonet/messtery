@@ -1,5 +1,5 @@
 var OnBeforeActions = {
-    isLoggedIn: function() {
+    isLoggedIn: function () {
         if (!Meteor.userId()) {
             this.redirect('login');
         } else {
@@ -8,6 +8,8 @@ var OnBeforeActions = {
     }
 };
 
-Router.onBeforeAction(OnBeforeActions.isLoggedIn, {
-    except: 'index login register forgotPassword verifyEmail resetPassword'.split(' ')
-});
+/*
+ Router.onBeforeAction(OnBeforeActions.isLoggedIn, {
+ except: 'index login register forgotPassword verifyEmail resetPassword'.split(' ')
+ });
+ */

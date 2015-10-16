@@ -1,0 +1,12 @@
+/*
+    Customization of libraries
+*/
+.s-alert {
+    &-success {
+        background-color: #1D9E74;
+    }
+    
+    &-error {
+        background-color: #9E1D1D;
+    }
+}
