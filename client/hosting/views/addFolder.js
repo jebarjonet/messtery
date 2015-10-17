@@ -1,3 +1,11 @@
+Template.addFolderHosting.helpers({
+    previousFolderAsObject: function() {
+        return {
+            f: getParentFolder()
+        };
+    }
+});
+
 AutoForm.addHooks('insertHostingFoldersForm', {
     before: {
         insert: function (doc) {

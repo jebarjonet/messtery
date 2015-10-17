@@ -1,5 +1,12 @@
 <template name="addFileHosting">
-    <h1>Add a file</h1>
+    <h1>
+        Add a file
+        <a class="btn btn-default pull-right" href="{{pathFor 'hosting' query=previousFolderAsObject}}"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </h1>
+
+    <p class="help-block">
+        File max size limited to 25Mb.
+    </p>
 
     {{> quickForm collection="HostingFiles" schema="AddHostingFilesForm" id="insertHostingFilesForm" type="insert"}}
 </template>

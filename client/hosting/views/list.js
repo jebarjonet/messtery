@@ -39,7 +39,7 @@ Template.listHosting.helpers({
         }
         return {};
     },
-    futureFolderAsObject: function () {
+    nextFolderAsObject: function () {
         return {
             f: this._id
         };

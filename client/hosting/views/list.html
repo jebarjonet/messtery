@@ -33,7 +33,7 @@
         {{#each $mapped breadcrumbs}}
             {{#unless $last}}
                 <li>
-                    <a href="{{pathFor route='hosting' query=futureFolderAsObject}}">{{name}}</a>
+                    <a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a>
                 </li>
             {{else}}
                 <li class="active">{{name}}</li>
@@ -64,7 +64,7 @@
                 </td>
                 <td>
                     {{#if isFolder}}
-                        <a href="{{pathFor route='hosting' query=futureFolderAsObject}}">{{name}}</a>
+                        <a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a>
                     {{else}}
                         <a href="{{file.url}}" target="_blank">{{name}}</a>
                     {{/if}}
