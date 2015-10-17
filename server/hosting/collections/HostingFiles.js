@@ -6,7 +6,8 @@ HostingFilesSchema = new SimpleSchema({
         max: 300
     },
     createdAt: {
-        type: Date
+        type: Date,
+        optional: true
     },
     file: {
         type: String
@@ -14,6 +15,27 @@ HostingFilesSchema = new SimpleSchema({
     parent: {
         type: String,
         optional: true
+    },
+    encrypted: {
+        type: Boolean
+    }
+});
+
+HostingFiles.before.insert(function (userId, doc) {
+    doc.createdAt = Date.now();
+});
+
+HostingFiles.allow({
+    update: function (userId) {
+        //return !!userId;
+        return true;
+    },
+    remove: function (userId) {
+        return !!userId;
+    },
+    insert: function (userId) {
+        //return !!userId;
+        return true;
     }
 });
 

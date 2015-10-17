@@ -45,3 +45,4 @@ check
 jparker:crypto-aes
 pfafman:filesaver
 cfs:gridfs
+cfs:autoform

@@ -1,7 +1,7 @@
 ResetPasswordForm = new SimpleSchema({
     password: {
         type: String,
-        label: "Nouveau mot de passe",
+        label: "New password",
         min: 5,
         max: 50,
         autoform: {
@@ -10,7 +10,7 @@ ResetPasswordForm = new SimpleSchema({
     },
     confirmPassword: {
         type: String,
-        label: "Confirmation du nouveau mot de passe",
+        label: "New password repeated",
         autoform: {
             type: "password"
         },

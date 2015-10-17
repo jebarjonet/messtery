@@ -1,7 +1,7 @@
 AddHostingFoldersForm = new SimpleSchema({
     name: {
         type: String,
-        label: "Nom",
+        label: "Name",
         max: 100
     }
 });

@@ -1,6 +1,7 @@
 var routerConfig = {
     // Iron Router
     layoutTemplate: 'layout',
+    notFoundTemplate: 'notFound',
     // Loader
     progressDelay: 200,
     progressSpinner: false

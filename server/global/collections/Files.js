@@ -1,24 +1,18 @@
-Files = new FS.Collection('files', {
-    stores: [
-        new FS.Store.GridFS('files')
-    ]
-});
-
 Files.allow({
-    update: function (userId, doc) {
-        //return doc.owner === userId;
+    update: function (userId) {
+        //return !!userId;
         return true;
     },
-    remove: function (userId, doc) {
-        //return doc.owner === userId;
+    remove: function (userId) {
+        //return !!userId;
         return true;
     },
-    insert: function (userId, doc) {
-        //return !!userId && !!doc.owner;
+    insert: function (userId) {
+        //return !!userId;
         return true;
     },
-    download: function (userId, doc) {
-        //return doc.owner === userId;
+    download: function (userId) {
+        //return !!userId;
         return true;
     }
 });

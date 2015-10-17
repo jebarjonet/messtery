@@ -1,6 +1,6 @@
 ForgotPasswordForm = new SimpleSchema({
     email: {
         type: String,
-        label: "Adresse email de ton compte"
+        label: "Email address of your account"
     }
 });

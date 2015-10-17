@@ -1,13 +1,13 @@
 RegistrationForm = new SimpleSchema({
     username: {
         type: String,
-        label: "Nom d'utilisateur",
+        label: "Username",
         min: 4,
         max: 20
     },
     email: {
         type: String,
-        label: "Adresse email",
+        label: "Email address",
         min: 4,
         max: 100,
         autoform: {
@@ -19,7 +19,7 @@ RegistrationForm = new SimpleSchema({
     },
     password: {
         type: String,
-        label: "Mot de passe",
+        label: "Password",
         min: 5,
         max: 50,
         autoform: {
@@ -28,7 +28,7 @@ RegistrationForm = new SimpleSchema({
     },
     confirm: {
         type: String,
-        label: "Confirmation du mot de passe",
+        label: "Password repeated",
         autoform: {
             type: "password"
         },

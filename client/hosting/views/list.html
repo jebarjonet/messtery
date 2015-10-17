@@ -1,7 +1,97 @@
 <template name="listHosting">
-    <p>SEARCH</p>
+    <div class="row row-grid">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Search</button>
+                </span>
+            </div>
+        </div>
+    </div>
 
-    <p>BREADCRUMBS</p>
+    <div class="row-grid">
+        <a href="{{pathFor 'hosting.addFolder' query=currentFolderAsObject}}" class="btn btn-default">
+            New folder
+        </a>
+        <a href="{{pathFor 'hosting.addFile' query=currentFolderAsObject}}" class="btn btn-default">
+            New file
+        </a>
+    </div>
 
-    <p>LIST</p>
+    <ol class="breadcrumb row-grid">
+        {{#if isEmpty breadcrumbs}}
+            <li class="active">
+                <i class="fa fa-lg fa-home"></i>
+            </li>
+        {{else}}
+            <li>
+                <a href="{{pathFor 'hosting'}}"><i class="fa fa-lg fa-home"></i></a>
+            </li>
+        {{/if}}
+
+        {{#each $mapped breadcrumbs}}
+            {{#unless $last}}
+                <li>
+                    <a href="{{pathFor route='hosting' query=futureFolderAsObject}}">{{name}}</a>
+                </li>
+            {{else}}
+                <li class="active">{{name}}</li>
+            {{/unless}}
+        {{/each}}
+    </ol>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each children}}
+            <tr>
+                <td style="width: 24px;">
+                    {{#if isFolder}}
+                        <i class="fa fa-lg fa-fw fa-folder" style="color: #E8C842;" title="Folder"></i>
+                    {{else}}
+                        {{#with fileTypeToIcon}}
+                            <i class="fa fa-lg fa-fw fa-{{icon}}" style="{{#if color}}color: {{color}};{{/if}}" title="{{title}}"></i>
+                        {{/with}}
+                    {{/if}}
+                </td>
+                <td>
+                    {{#if isFolder}}
+                        <a href="{{pathFor route='hosting' query=futureFolderAsObject}}">{{name}}</a>
+                    {{else}}
+                        <a href="{{file.url}}" target="_blank">{{name}}</a>
+                    {{/if}}
+                </td>
+                <td>{{dateFormat createdAt}}</td>
+                <td style="width: 90px;">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {{#if isFolder}}
+                                <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                            {{else}}
+                                <li><a href=""><i class="fa fa-fw fa-info"></i> Information</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-download"></i> Download</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
+                                <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
 </template>

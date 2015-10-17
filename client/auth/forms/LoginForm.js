@@ -1,11 +1,11 @@
 LoginForm = new SimpleSchema({
     email: {
         type: String,
-        label: "Adresse email ou Pseudo"
+        label: "Email address or username"
     },
     password: {
         type: String,
-        label: "Mot de passe",
+        label: "Password",
         autoform: {
             type: "password"
         }
