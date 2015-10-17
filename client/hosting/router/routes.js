@@ -19,7 +19,7 @@ function ifParentFolderExists() {
     var parentFolder = this.params.query.f;
     if(!parentFolder) {
         this.next();
-    } else if (HostingFolders.find().count() && HostingFolders.findOne(parentFolder)) {
+    } else if (!Meteor.status().connected || (Meteor.status().connected && HostingFolders.find().count() && HostingFolders.findOne(parentFolder))) {
         this.next();
     } else {
         this.redirect('hosting');

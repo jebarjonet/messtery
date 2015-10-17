@@ -9,8 +9,7 @@ AddHostingFilesForm = new SimpleSchema({
         label: 'File',
         autoform: {
             afFieldInput: {
-                type: "cfs-file",
-                collection: "files"
+                type: "file"
             }
         }
     },

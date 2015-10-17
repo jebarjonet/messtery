@@ -32,9 +32,7 @@
 
         {{#each $mapped breadcrumbs}}
             {{#unless $last}}
-                <li>
-                    <a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a>
-                </li>
+                <li><a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a></li>
             {{else}}
                 <li class="active">{{name}}</li>
             {{/unless}}
@@ -46,7 +44,9 @@
         <tr>
             <th></th>
             <th>Name</th>
-            <th>Date</th>
+            <th class="hidden-xs">Type</th>
+            <th class="hidden-xs">Size</th>
+            <th class="hidden-xs">Date</th>
             <th></th>
         </tr>
         </thead>
@@ -58,7 +58,7 @@
                         <i class="fa fa-lg fa-fw fa-folder" style="color: #E8C842;" title="Folder"></i>
                     {{else}}
                         {{#with fileTypeToIcon}}
-                            <i class="fa fa-lg fa-fw fa-{{icon}}" style="{{#if color}}color: {{color}};{{/if}}" title="{{title}}"></i>
+                            <i class="fa fa-lg fa-fw fa-{{icon}}" style="{{#if color}}color: {{color}};{{/if}}"></i>
                         {{/with}}
                     {{/if}}
                 </td>
@@ -66,27 +66,42 @@
                     {{#if isFolder}}
                         <a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a>
                     {{else}}
-                        <a href="{{file.url}}" target="_blank">{{name}}</a>
+                        {{#if encrypted}}
+                            <a class="decrypt">{{name}}</a>
+                        {{else}}
+                            <a href="{{file.url}}" target="_blank">{{name}}</a>
+                        {{/if}}
                     {{/if}}
                 </td>
-                <td>{{dateFormat createdAt}}</td>
+                <td class="text-muted hidden-xs">
+                    {{#unless isFolder}}
+                        {{#with fileTypeToIcon}}
+                            {{title}}
+                        {{/with}}
+                    {{/unless}}
+                </td>
+                <td class="hidden-xs">
+                    {{#unless isFolder}}
+                        {{fileSize}}
+                    {{/unless}}
+                </td>
+                <td class="hidden-xs">
+                    {{#unless isFolder}}
+                        {{formatDate createdAt}}
+                    {{/unless}}
+                </td>
                 <td style="width: 90px;">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                             Actions <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            {{#if isFolder}}
-                                <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
-                            {{else}}
+                            {{#unless isFolder}}
                                 <li><a href=""><i class="fa fa-fw fa-info"></i> Information</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-download"></i> Download</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
-                                <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
-                            {{/if}}
+                            {{/unless}}
+                            <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                            <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
+                            <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
                         </ul>
                     </div>
                 </td>

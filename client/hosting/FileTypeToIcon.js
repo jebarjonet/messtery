@@ -1,7 +1,11 @@
-Template.registerHelper('fileTypeToIcon', function() {
+Template.registerHelper('fileTypeToIcon', function () {
+    if (this.encrypted) {
+        return {icon: 'lock', title: 'Encrypted'};
+    }
+
     var file = this.file;
-    var icon = _.find(FileTypeToIcon, function(data) {
-        return ~data.types.indexOf(file.original.type);
+    var icon = _.find(FileTypeToIcon, function (data) {
+        return ~data.types.indexOf(file.type());
     });
     return icon ? icon : {icon: 'file-o', title: 'File'};
 });

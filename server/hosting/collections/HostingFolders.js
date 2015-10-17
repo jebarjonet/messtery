@@ -5,18 +5,10 @@ HostingFoldersSchema = new SimpleSchema({
         type: String,
         max: 300
     },
-    createdAt: {
-        type: Date,
-        optional: true
-    },
     parent: {
         type: String,
         optional: true
     }
-});
-
-HostingFolders.before.insert(function (userId, doc) {
-    doc.createdAt = Date.now();
 });
 
 HostingFolders.allow({
