@@ -1,8 +1,6 @@
 Template.addFileHosting.helpers({
     previousFolderAsObject: function () {
-        return {
-            f: getParentFolder()
-        };
+        return getParentFolder() ? {f: getParentFolder()} : {};
     }
 });
 
