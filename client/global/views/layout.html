@@ -11,7 +11,11 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">File hosting</a></li>
+                    {{#if currentUser}}
+                        <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">File hosting</a></li>
+                    {{else}}
+                        <li class="{{isActiveRoute 'login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
+                    {{/if}}
                 </ul>
             </div>
         </div>

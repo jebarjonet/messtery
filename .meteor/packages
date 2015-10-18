@@ -47,3 +47,5 @@ pfafman:filesaver
 cfs:gridfs
 cfs:autoform
 http
+alanning:roles
+peppelg:bootstrap-3-modal

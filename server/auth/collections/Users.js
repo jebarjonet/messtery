@@ -1,7 +1,4 @@
 UserSchema = new SimpleSchema({
-    username: {
-        type: String
-    },
     emails: {
         type: Array,
         optional: true
@@ -28,6 +25,10 @@ UserSchema = new SimpleSchema({
         type: Object,
         optional: true,
         blackbox: true
+    },
+    passphrase: {
+        type: String,
+        optional: true
     }
 });
 
