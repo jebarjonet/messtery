@@ -4,13 +4,13 @@ Template.registerHelper('fileTypeToIcon', function () {
     }
 
     var file = this.file;
-    var icon = _.find(FileTypeToIcon, function (data) {
+    var icon = _.find(FileTypeToIconConfig, function (data) {
         return ~data.types.indexOf(file.type());
     });
     return icon ? icon : {icon: 'file-o', title: 'File'};
 });
 
-FileTypeToIcon = [
+FileTypeToIconConfig = [
     {
         types: [
             'application/x-compressed',

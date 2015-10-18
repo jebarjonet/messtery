@@ -54,8 +54,9 @@ function uploadFile(doc, cbSuccess, cbError) {
         var result = e.target.result;
 
         if (doc.encrypted) {
-            var encryptNotification = notification('Encrypting... Please wait', 'info', {timeout: 'none'});
+            var encryptNotification = notification('Encrypting... Please wait', 'warning', {timeout: 'none'});
 
+            // long JS action freezing other JS scripts
             Meteor.setTimeout(function () {
                 result = EncryptionService.encryptFile(result, 'mapassphrase');
                 sAlert.close(encryptNotification);

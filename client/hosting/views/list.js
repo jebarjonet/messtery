@@ -1,50 +1,10 @@
 Template.listHosting.helpers({
-    breadcrumbs: function () {
-        return generateBreadcrumbs(getCurrentFolder());
-    },
-    children: function () {
-        var currentFolder = getCurrentFolder();
-        var query = {};
-        if (currentFolder) {
-            query.parent = currentFolder
-        } else {
-            query.parent = {
-                $exists: false
-            };
-        }
-        var hostingFolders = HostingFolders.find(query, {
-            sort: {
-                name: 1
-            }
-        }).fetch();
-        _.forEach(hostingFolders, function (hostingFolder) {
-            hostingFolder.isFolder = true;
-        });
-        var hostingFiles = HostingFiles.find(query, {
-            sort: {
-                name: 1
-            }
-        }).fetch();
-        _.forEach(hostingFiles, function (hostingFile) {
-            hostingFile.file = Files.findOne(hostingFile.file);
-        });
-        return _.union(hostingFolders, hostingFiles);
-    },
-    currentFolderAsObject: function () {
-        var currentFolder = getCurrentFolder();
-        if (currentFolder) {
-            return {
-                f: currentFolder
-            };
-        }
-        return {};
-    },
     nextFolderAsObject: function () {
         return {
             f: this._id
         };
     },
-    fileSize: function() {
+    fileSize: function () {
         return formatBytes(this.file.size());
     }
 });
@@ -52,15 +12,19 @@ Template.listHosting.helpers({
 Template.listHosting.events({
     'click .decrypt': function () {
         var self = this;
-        var url = 'http://localhost:3000' + this.file.url();
+        var url = this.file.url();
 
+        var downloadNotification = notification('Downloading...', 'info', {timeout: 'none'});
         HTTP.get(url, {}, function (err, result) {
+            sAlert.close(downloadNotification);
             if (err) {
                 return;
             }
 
-            var decryptNotification = notification('Decrypting... Please wait', 'info', {timeout: 'none'});
-            Meteor.setTimeout(function() {
+            var decryptNotification = notification('Decrypting... Please wait', 'warning', {timeout: 'none'});
+
+            // long JS action freezing other JS scripts
+            Meteor.setTimeout(function () {
                 var decrypted = EncryptionService.decryptFile(result.content, 'mapassphrase');
                 sAlert.close(decryptNotification);
 
@@ -72,21 +36,3 @@ Template.listHosting.events({
         });
     }
 });
-
-function getCurrentFolder() {
-    return Router.current().params.query.f;
-}
-
-function generateBreadcrumbs(folderId, breadcrumbs) {
-    breadcrumbs = breadcrumbs ? breadcrumbs : [];
-    var folder = HostingFolders.findOne(folderId);
-
-    if (folder) {
-        breadcrumbs.unshift(folder);
-        if (folder.parent) {
-            return generateBreadcrumbs(folder.parent, breadcrumbs);
-        }
-    }
-
-    return breadcrumbs;
-}

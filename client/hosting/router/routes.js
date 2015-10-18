@@ -1,7 +1,5 @@
 Router.map(function () {
-    this.route('/hosting', {
-        template: 'listHosting'
-    });
+    this.route('/hosting');
     this.route('/hosting/addFolder', {
         name: 'hosting.addFolder',
         onRun: ifParentFolderExists
@@ -10,8 +8,9 @@ Router.map(function () {
         name: 'hosting.addFile',
         onRun: ifParentFolderExists
     });
-    this.route('/hosting/search/:query', {
-        name: 'hosting.search'
+    this.route('/hosting/search/:terms', {
+        name: 'hosting.search',
+        template: 'hosting'
     });
 });
 

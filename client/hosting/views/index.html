@@ -1,0 +1,45 @@
+<template name="hosting">
+    <div class="row row-grid">
+        <div class="col-md-6">
+            <form class="input-group" name="search">
+                <input type="text" class="form-control" placeholder="Search..." value="{{searchQuery}}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </form>
+        </div>
+    </div>
+
+    {{#if displayTools}}
+        <div class="row-grid">
+            <a href="{{pathFor 'hosting.addFolder' query=currentFolderAsObject}}" class="btn btn-default">
+                New folder
+            </a>
+            <a href="{{pathFor 'hosting.addFile' query=currentFolderAsObject}}" class="btn btn-default">
+                New file
+            </a>
+        </div>
+
+        <ol class="breadcrumb row-grid">
+            {{#if isEmpty breadcrumbs}}
+                <li class="active">
+                    <i class="fa fa-lg fa-home"></i>
+                </li>
+            {{else}}
+                <li>
+                    <a href="{{pathFor 'hosting'}}"><i class="fa fa-lg fa-home"></i></a>
+                </li>
+            {{/if}}
+
+            {{#each $mapped breadcrumbs}}
+                {{#unless $last}}
+                    <li><a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a></li>
+                {{else}}
+                    <li class="active">{{name}}</li>
+                {{/unless}}
+            {{/each}}
+        </ol>
+    {{/if}}
+
+    {{> listHosting children}}
+</template>
