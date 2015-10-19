@@ -1,22 +1,27 @@
 Router.map(function () {
-    this.route('/hosting');
+    this.route('/hosting', {
+        waitOn: sub
+    });
     this.route('/hosting/addFolder', {
         name: 'hosting.addFolder',
-        onRun: ifParentFolderExists
+        onRun: ifParentFolderExists,
+        waitOn: sub
     });
     this.route('/hosting/addFile', {
         name: 'hosting.addFile',
-        onRun: ifParentFolderExists
+        onRun: ifParentFolderExists,
+        waitOn: sub
     });
     this.route('/hosting/search/:terms', {
         name: 'hosting.search',
-        template: 'hosting'
+        template: 'hosting',
+        waitOn: sub
     });
 });
 
 function ifParentFolderExists() {
     var parentFolder = this.params.query.f;
-    if(!parentFolder) {
+    if (!parentFolder) {
         this.next();
     } else if (!Meteor.status().connected || (Meteor.status().connected && HostingFolders.find().count() && HostingFolders.findOne(parentFolder))) {
         this.next();
@@ -24,4 +29,8 @@ function ifParentFolderExists() {
         this.redirect('hosting');
         notification("The requested folder does not exist");
     }
+}
+
+function sub() {
+    return Meteor.subscribe('hosting');
 }

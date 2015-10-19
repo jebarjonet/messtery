@@ -1,5 +1,6 @@
-Meteor.publish(null, function () {
+Meteor.publish('hosting', function () {
     return [
+        Files.find(),
         HostingFiles.find(),
         HostingFolders.find()
     ];

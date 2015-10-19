@@ -1,3 +1,18 @@
+UserEncryptionSchema = new SimpleSchema({
+    iv: {
+        type: String
+    },
+    key: {
+        type: String
+    },
+    passwordValidator: {
+        type: String
+    },
+    salt: {
+        type: String
+    }
+});
+
 UserSchema = new SimpleSchema({
     emails: {
         type: Array,
@@ -26,8 +41,12 @@ UserSchema = new SimpleSchema({
         optional: true,
         blackbox: true
     },
-    passphrase: {
-        type: String,
+    encryption: {
+        type: UserEncryptionSchema,
+        optional: true
+    },
+    roles: {
+        type: [String],
         optional: true
     }
 });

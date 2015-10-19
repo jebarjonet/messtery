@@ -3,8 +3,8 @@ AutoForm.addHooks('loginForm', {
         var self = this;
         this.event.preventDefault();
 
-        Meteor.loginWithPassword(doc.email, doc.password, function (error) {
-            self.done(error);
+        Meteor.loginWithPassword(doc.email, doc.password, function (err) {
+            self.done(err);
         });
     },
     onSuccess: function () {

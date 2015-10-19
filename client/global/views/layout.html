@@ -13,6 +13,7 @@
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
                         <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">File hosting</a></li>
+                        <li class="{{isActiveRoute regex='accounts'}}"><a href="{{pathFor 'accounts'}}">Accounts</a></li>
                     {{else}}
                         <li class="{{isActiveRoute 'login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
                     {{/if}}
