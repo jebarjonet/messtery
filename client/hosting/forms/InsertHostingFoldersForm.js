@@ -1,4 +1,4 @@
-AddHostingFoldersForm = new SimpleSchema({
+InsertHostingFoldersForm = new SimpleSchema({
     name: {
         type: String,
         label: "Name",

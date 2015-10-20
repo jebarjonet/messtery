@@ -14,25 +14,27 @@ Template.listHosting.events({
         var self = this;
         var url = this.file.url();
 
-        var downloadNotification = notification('Downloading...', 'info', {timeout: 'none'});
-        HTTP.get(url, {}, function (err, result) {
-            sAlert.close(downloadNotification);
-            if (err) {
-                return;
-            }
-
-            var decryptNotification = notification('Decrypting... Please wait', 'warning', {timeout: 'none'});
-
-            // long JS action freezing other JS scripts
-            Meteor.setTimeout(function () {
-                var decrypted = EncryptionService.decryptFile(result.content);
-                sAlert.close(decryptNotification);
-
-                if (decrypted) {
-                    // FileSaver.js giving the file to user
-                    saveAs(decrypted, self.name);
+        EncryptionService.needSessionInfo(function () {
+            var downloadNotification = notification('Downloading...', 'info', {timeout: 'none'});
+            HTTP.get(url, {}, function (err, result) {
+                sAlert.close(downloadNotification);
+                if (err) {
+                    return;
                 }
-            }, 500);
+
+                var decryptNotification = notification('Decrypting... Please wait', 'warning', {timeout: 'none'});
+
+                // long JS action freezing other JS scripts
+                Meteor.setTimeout(function () {
+                    var decrypted = EncryptionService.decryptFile(result.content);
+                    sAlert.close(decryptNotification);
+
+                    if (decrypted) {
+                        // FileSaver.js giving the file to user
+                        saveAs(decrypted, self.name);
+                    }
+                }, 500);
+            });
         });
     }
 });

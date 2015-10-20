@@ -57,6 +57,9 @@ Template.hosting.helpers({
     },
     searchQuery: function () {
         return getCurrentSearchQuery();
+    },
+    forgetSessionInfoDisabled: function () {
+        return EncryptionService.getSessionInfo() ? '' : 'disabled';
     }
 });
 
@@ -70,6 +73,9 @@ Template.hosting.events({
                 terms: getFormSearchQuery()
             });
         }
+    },
+    'click #forgetSessionInfo': function () {
+        EncryptionService.forgetSessionInfo();
     }
 });
 

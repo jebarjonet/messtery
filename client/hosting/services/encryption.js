@@ -1,7 +1,5 @@
-var fakePassword = 'monmdp';
-
 EncryptionService = {
-    setupUserEncryption: function (password, key) {
+    setupUserEncryptionInfo: function (password, key) {
         var encryption = {};
 
         key = key ? key : EncryptionService.generateHexString(128);
@@ -14,16 +12,28 @@ EncryptionService = {
 
         return encryption;
     },
-    changePasswordUserEncryption: function (newPassword) {
+    changePasswordUserEncryptionInfo: function (newPassword) {
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getPasswordValidator(fakePassword, encryption.salt);
+        var passwordValidator = EncryptionService.getSessionInfo();
+
+        if (!passwordValidator) {
+            notification('Should have decrypted user encryption info before running this function');
+            return;
+        }
+
         var keyEncrypter = passwordValidator[0];
 
-        return EncryptionService.setupUserEncryption(newPassword, keyEncrypter);
+        return EncryptionService.setupUserEncryptionInfo(newPassword, keyEncrypter);
     },
     encryptFile: function (content) {
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getPasswordValidator(fakePassword, encryption.salt);
+        var passwordValidator = EncryptionService.getSessionInfo();
+
+        if (!passwordValidator) {
+            notification('Should have decrypted user encryption info before running this function');
+            return;
+        }
+
         var keyEncrypter = passwordValidator[0];
 
         var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
@@ -36,8 +46,20 @@ EncryptionService = {
         });
     },
     decryptFile: function (content) {
+        var sessionInfo = EncryptionService.getSessionInfo();
+        if (!sessionInfo) {
+            EncryptionService.askUserPassword();
+            return;
+        }
+
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getPasswordValidator(fakePassword, encryption.salt);
+        var passwordValidator = EncryptionService.getSessionInfo();
+
+        if (!passwordValidator) {
+            notification('Should have decrypted user encryption info before running this function');
+            return;
+        }
+
         var keyEncrypter = passwordValidator[0];
 
         if (encryption.passwordValidator !== passwordValidator[1]) {
@@ -49,7 +71,7 @@ EncryptionService = {
         var decryptedFile = CryptoJS.AES.decrypt(content, key).toString(CryptoJS.enc.Latin1);
 
         if (!/^data:/.test(decryptedFile)) {
-            notification('Invalid pass phrase or file. Please try again.');
+            notification('Invalid key or file. Please try again');
             return;
         }
 
@@ -60,7 +82,7 @@ EncryptionService = {
         return EncryptionService.b64toBlob(b64FileData, fileContentType);
     },
     /**
-     * Creates Blob from base64 data (optimized by slicing data)
+     * Create Blob from base64 data (optimized by slicing data)
      * @param b64Data
      * @param contentType
      * @param sliceSize
@@ -88,7 +110,7 @@ EncryptionService = {
         return new Blob(byteArrays, {type: contentType});
     },
     /**
-     * Generates a string with hex values
+     * Generate a string with hex values
      * @param length
      * @returns {string}
      */
@@ -103,7 +125,7 @@ EncryptionService = {
         return key;
     },
     /**
-     * returns a combination between the password and the salt
+     * Return a combination between the password and the salt
      * @param password
      * @param salt
      * @returns {string}
@@ -112,7 +134,7 @@ EncryptionService = {
         return CryptoJS.EvpKDF(password, salt, {keySize: 256 / 8}).toString();
     },
     /**
-     * Returns the two halves of a string
+     * Return the two halves of a string
      * @param passwordValidator
      * @returns {*[]}
      */
@@ -132,5 +154,49 @@ EncryptionService = {
     getPasswordValidator: function (password, salt) {
         var passwordValidator = EncryptionService.passwordAndSalt(password, salt);
         return EncryptionService.splitStringInHalf(passwordValidator);
-    }
+    },
+    /**
+     * Return session info needed for encryption
+     * @returns {any}
+     */
+    getSessionInfo: function () {
+        return Session.get('passwordValidator');
+    },
+    /**
+     * Open a modal asking for user password
+     */
+    askUserPassword: function () {
+        Modal.show('enterPasswordModal');
+    },
+    /**
+     * Pass a function that needs session info after session info is calculated
+     * @param cb
+     */
+    needSessionInfo: function (cb) {
+        EncryptionService.pendingFunction = cb;
+        if (!EncryptionService.getSessionInfo()) {
+            EncryptionService.askUserPassword();
+        } else {
+            EncryptionService.executePendingFunction();
+        }
+    },
+    /**
+     * Execute the pending function previously passed in needSessionInfo() if exists
+     */
+    executePendingFunction: function () {
+        if (_.isFunction(EncryptionService.pendingFunction)) {
+            EncryptionService.pendingFunction();
+            EncryptionService.pendingFunction = undefined;
+        }
+    },
+    /**
+     * Forget the current session info
+     */
+    forgetSessionInfo: function () {
+        Session.set('passwordValidator', undefined);
+    },
+    /**
+     * Store the pending function passed in needSessionInfo()
+     */
+    pendingFunction: undefined
 };

@@ -1,6 +1,18 @@
 Template.addFileHosting.helpers({
     previousFolderAsObject: function () {
         return getParentFolder() ? {f: getParentFolder()} : {};
+    },
+    needsSessionInfo: function () {
+        return needSesionInfo();
+    },
+    submitButtonDisabled: function () {
+        return needSesionInfo() ? 'disabled' : '';
+    }
+});
+
+Template.addFileHosting.events({
+    'click #setSessionInfo': function () {
+        EncryptionService.needSessionInfo();
     }
 });
 
@@ -36,6 +48,10 @@ AutoForm.addHooks('insertHostingFilesForm', {
 function getParentFolder() {
     var parentFolder = Router.current().params.query.f;
     return parentFolder ? parentFolder : undefined;
+}
+
+function needSesionInfo() {
+    return AutoForm.getFieldValue('encrypted', 'insertHostingFilesForm') && !EncryptionService.getSessionInfo()
 }
 
 function uploadFile(doc, cbSuccess, cbError) {

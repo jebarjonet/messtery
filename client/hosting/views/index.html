@@ -18,6 +18,9 @@
             <a href="{{pathFor 'hosting.addFile' query=currentFolderAsObject}}" class="btn btn-default">
                 New file
             </a>
+            <button id="forgetSessionInfo" class="btn btn-default pull-right" {{forgetSessionInfoDisabled}}>
+                Forget session encryption keys
+            </button>
         </div>
 
         <ol class="breadcrumb row-grid">

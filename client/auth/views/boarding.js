@@ -4,7 +4,7 @@ AutoForm.addHooks('boardingForm', {
         this.event.preventDefault();
 
         var token = Router.current().params.token;
-        var encryption = EncryptionService.setupUserEncryption(doc.password);
+        var encryption = EncryptionService.setupUserEncryptionInfo(doc.password);
 
         Meteor.call('registerUser', token, encryption, function (err) {
             if (err) {
