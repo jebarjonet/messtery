@@ -50,18 +50,18 @@
                         {{formatDate createdAt}}
                     {{/unless}}
                 </td>
-                <td style="width: 90px;">
-                    <div class="btn-group">
+                <td>
+                    <div class="btn-group pull-right">
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                             Actions <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             {{#unless isFolder}}
-                                <li><a href=""><i class="fa fa-fw fa-info"></i> Information</a></li>
+                                <li class="information-action"><a><i class="fa fa-fw fa-info"></i> Information</a></li>
                             {{/unless}}
-                            <li><a href=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
-                            <li><a href=""><i class="fa fa-fw fa-arrows"></i> Move</a></li>
-                            <li><a href=""><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                            <li><a><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                            <li><a><i class="fa fa-fw fa-arrows"></i> Move</a></li>
+                            <li><a><i class="fa fa-fw fa-trash-o"></i> Delete </a></li>
                         </ul>
                     </div>
                 </td>

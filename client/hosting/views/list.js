@@ -36,5 +36,8 @@ Template.listHosting.events({
                 }, 500);
             });
         });
+    },
+    'click .information-action': function () {
+        Modal.show('informationHostingModal', this);
     }
 });

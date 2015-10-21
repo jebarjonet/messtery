@@ -1,0 +1,40 @@
+<template name="informationHostingModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Information</h4>
+                </div>
+
+                <div class="modal-body">
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt>
+                        <dd>{{name}}</dd>
+
+                        <dt>Type</dt>
+                        <dd>
+                            {{#with fileTypeToIcon}}
+                                {{title}}
+                            {{/with}}
+                        </dd>
+
+                        <dt>Size</dt>
+                        <dd>{{fileSize}}</dd>
+
+                        <dt>Created at</dt>
+                        <dd>{{formatDate createdAt}}</dd>
+
+                        <dt>Parent folder</dt>
+                        <dd>
+                            {{#if parentFolder}}
+                                {{parentFolder}}
+                            {{else}}
+                                <i class="text-muted">No parent folder</i>
+                            {{/if}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

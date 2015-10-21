@@ -132,7 +132,7 @@ EncryptionService = {
      * @returns {string}
      */
     passwordAndSalt: function (password, salt) {
-        return CryptoJS.EvpKDF(password, salt, {keySize: 256 / 16}).toString();
+        return CryptoJS.EvpKDF(password, salt, {keySize: 16}).toString();
     },
     /**
      * Return the two halves of a string
