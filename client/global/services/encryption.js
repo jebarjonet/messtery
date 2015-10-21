@@ -2,9 +2,9 @@ EncryptionService = {
     setupUserEncryptionInfo: function (password, key) {
         var encryption = {};
 
-        key = key ? key : EncryptionService.generateHexString(128);
-        encryption.iv = EncryptionService.generateHexString(128);
-        encryption.salt = EncryptionService.generateHexString(64);
+        key = key ? key : EncryptionService.generateHexString(32);
+        encryption.iv = EncryptionService.generateHexString(32);
+        encryption.salt = EncryptionService.generateHexString(32);
         var passwordValidator = EncryptionService.getPasswordValidator(password, encryption.salt);
         var keyEncrypter = passwordValidator[0];
         encryption.passwordValidator = passwordValidator[1];
@@ -39,7 +39,7 @@ EncryptionService = {
 
         var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
         var encrypted = CryptoJS.AES.encrypt(content, key).toString();
-        var name = (Math.random() + 1).toString(36).substring(15);
+        var name = EncryptionService.generateHexString(32);
 
         return new File([encrypted], name, {
             type: 'text/plain',
@@ -132,7 +132,7 @@ EncryptionService = {
      * @returns {string}
      */
     passwordAndSalt: function (password, salt) {
-        return CryptoJS.EvpKDF(password, salt, {keySize: 256 / 8}).toString();
+        return CryptoJS.EvpKDF(password, salt, {keySize: 256 / 16}).toString();
     },
     /**
      * Return the two halves of a string

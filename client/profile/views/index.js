@@ -10,12 +10,12 @@ AutoForm.addHooks('changePasswordForm', {
             return;
         }
 
-        Meteor.call('changePasswordUser', encryption, function (err) {
+        Accounts.changePassword(doc.oldPassword, doc.newPassword, function (err) {
             if (err) {
                 self.done(err);
             }
 
-            Accounts.changePassword(doc.oldPassword, doc.newPassword, function (err) {
+            Meteor.call('changePasswordUser', encryption, function (err) {
                 self.done(err);
             });
         });
