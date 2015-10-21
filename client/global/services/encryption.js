@@ -12,18 +12,19 @@ EncryptionService = {
 
         return encryption;
     },
-    changePasswordUserEncryptionInfo: function (newPassword) {
+    changePasswordUserEncryptionInfo: function (oldPassword, newPassword) {
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getSessionInfo();
+        var passwordValidator = EncryptionService.getPasswordValidator(oldPassword, encryption.salt);
+        var keyEncrypter = passwordValidator[0];
+        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
 
-        if (!passwordValidator) {
-            notification('Should have decrypted user encryption info before running this function');
+        if (encryption.passwordValidator !== passwordValidator[1]) {
+            notification('Wrong current password');
             return;
         }
 
-        var keyEncrypter = passwordValidator[0];
-
-        return EncryptionService.setupUserEncryptionInfo(newPassword, keyEncrypter);
+        EncryptionService.forgetSessionInfo();
+        return EncryptionService.setupUserEncryptionInfo(newPassword, key);
     },
     encryptFile: function (content) {
         var encryption = Meteor.user().encryption;

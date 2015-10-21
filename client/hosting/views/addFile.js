@@ -28,7 +28,8 @@ AutoForm.addHooks('insertHostingFilesForm', {
                     doc.parent = getParentFolder();
                 }
                 self.result(doc);
-            }, function () {
+            }, function (err) {
+                notification(err);
                 self.result(false);
             });
         }
@@ -59,8 +60,7 @@ function uploadFile(doc, cbSuccess, cbError) {
     var reader = new FileReader();
 
     if (file.size > appConfig.fileMaxSize) {
-        notification('The file is too big to be uploaded');
-        cbError();
+        cbError('The file is too big to be uploaded');
         return;
     }
 
@@ -89,8 +89,7 @@ function saveResult(result, cbSuccess, cbError) {
 
     Files.insert(FSFile, function (err, fileObj) {
         if (err) {
-            notification(err.reason);
-            cbError();
+            cbError(err.reason);
             return;
         }
 

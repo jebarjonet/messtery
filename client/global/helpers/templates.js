@@ -29,3 +29,7 @@ Template.registerHelper('isEmpty', function (data) {
         return !data.count();
     }
 });
+
+Template.registerHelper('pluralize', function(value) {
+    return _.isNumber(value) && value > 1 ? 's' : '';
+});

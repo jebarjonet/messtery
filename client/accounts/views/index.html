@@ -1,18 +1,43 @@
 <template name="accounts">
+    <p>
+        Currently {{usersCount}} member{{pluralize usersCount}}
+    </p>
+
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Email</th>
             <th>Role</th>
-            <th class="hidden-xs">Active</th>
+            <th>Email</th>
+            <th>Active</th>
             <th class="hidden-xs">Created</th>
             <th class="hidden-xs">Last connection</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
         {{#each this}}
-
+            <tr>
+                <td>
+                    {{#if isAdmin}}
+                        <span class="label label-primary">Admin</span>
+                    {{else}}
+                        <span class="label label-sober">Member</span>
+                    {{/if}}
+                </td>
+                <td>{{emailAddress}}</td>
+                <td>
+                    {{#if isActivated}}
+                        <span class="label label-success">Yes</span>
+                    {{else}}
+                        <span class="label label-danger">No</span>
+                    {{/if}}
+                </td>
+                <td class="hidden-xs">
+                    {{formatDate createdAt}}
+                </td>
+                <td class="hidden-xs">
+                    {{formatDate lastConnectionAt}}
+                </td>
+            </tr>
         {{/each}}
         </tbody>
     </table>

@@ -18,6 +18,11 @@
                         <li class="{{isActiveRoute 'login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
                     {{/if}}
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if currentUser}}
+                        <li class="{{isActiveRoute regex='profile'}} pull-right"><a href="{{pathFor 'profile'}}">Profile</a></li>
+                    {{/if}}
+                </ul>
             </div>
         </div>
     </nav>

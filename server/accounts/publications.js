@@ -5,7 +5,8 @@ Meteor.publish('accounts', function () {
                 emails: 1,
                 createdAt: 1,
                 lastConnectionAt: 1,
-                roles: 1
+                roles: 1,
+                isActivated: 1
             }
         })
     ];

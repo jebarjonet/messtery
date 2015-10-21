@@ -3,7 +3,8 @@ EnterPasswordForm = new SimpleSchema({
         type: String,
         label: "Your password",
         autoform: {
-            type: "password"
+            type: "password",
+            autofocus: true
         }
     }
 });

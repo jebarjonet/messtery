@@ -2,7 +2,11 @@ Router.map(function () {
     this.route('/accounts', {
         waitOn: sub,
         data: function() {
-            return Meteor.users.find();
+            return Meteor.users.find({}, {
+                sort: {
+                    createdAt: 1
+                }
+            });
         }
     });
 });

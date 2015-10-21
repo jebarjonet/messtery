@@ -6,8 +6,7 @@ AutoForm.addHooks('enterPasswordForm', {
         var passwordValidator = EncryptionService.getPasswordValidator(doc.password, encryption.salt);
 
         if (encryption.passwordValidator !== passwordValidator[1]) {
-            notification('Wrong password when tried to decrypt');
-            this.done();
+            this.done(new Meteor.Error(403, 'Wrong password when tried to decrypt'));
             return;
         }
 

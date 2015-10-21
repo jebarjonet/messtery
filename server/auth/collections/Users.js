@@ -48,6 +48,10 @@ UserSchema = new SimpleSchema({
     roles: {
         type: [String],
         optional: true
+    },
+    isActivated: {
+        type: Boolean,
+        optional: true
     }
 });
 
