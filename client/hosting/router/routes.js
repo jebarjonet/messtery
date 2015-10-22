@@ -2,12 +2,12 @@ Router.map(function () {
     this.route('/hosting', {
         waitOn: sub
     });
-    this.route('/hosting/addFolder', {
+    this.route('/hosting/add-folder', {
         name: 'hosting.addFolder',
         onRun: ifParentFolderExists,
         waitOn: sub
     });
-    this.route('/hosting/addFile', {
+    this.route('/hosting/add-file', {
         name: 'hosting.addFile',
         onRun: ifParentFolderExists,
         waitOn: sub

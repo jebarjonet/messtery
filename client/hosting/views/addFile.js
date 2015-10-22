@@ -34,8 +34,10 @@ AutoForm.addHooks('insertHostingFilesForm', {
             });
         }
     },
-    onSuccess: function () {
-        notification('File saved', 'success');
+    onSuccess: function (t, result) {
+        if (!isFileUploaded(HostingFiles.findOne(result).file)) {
+            notification('Sending file', 'info');
+        }
         if (getParentFolder()) {
             Router.go('hosting', {}, {
                 query: 'f=' + getParentFolder()
@@ -94,5 +96,18 @@ function saveResult(result, cbSuccess, cbError) {
         }
 
         cbSuccess(fileObj);
+
+        // waiting for file to be uploaded
+        Tracker.autorun(function (c) {
+            if (isFileUploaded(fileObj._id)) {
+                notification('File saved', 'success');
+                c.stop();
+            }
+        });
     });
+}
+
+function isFileUploaded(fileId) {
+    var file = Files.findOne(fileId);
+    return file && file.url();
 }

@@ -26,10 +26,17 @@
                     {{#if isFolder}}
                         <a href="{{pathFor route='hosting' query=nextFolderAsObject}}">{{name}}</a>
                     {{else}}
-                        {{#if encrypted}}
-                            <a class="decrypt">{{name}}</a>
+                        {{#if file.url}}
+                            {{#if encrypted}}
+                                <a class="decrypt">{{name}}</a>
+                            {{else}}
+                                <a href="{{file.url}}" target="_blank">{{name}}</a>
+                            {{/if}}
                         {{else}}
-                            <a href="{{file.url}}" target="_blank">{{name}}</a>
+                            <span class="text-muted">
+                                <i class="fa fa-fw fa-spin fa-refresh"></i>
+                                {{name}}
+                            </span>
                         {{/if}}
                     {{/if}}
                 </td>
