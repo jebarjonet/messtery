@@ -1,8 +1,13 @@
 Template.deleteHostingModal.events({
     'click button': function () {
-        var Entity = this.isFolder ? HostingFolders : HostingFiles;
-        Entity.remove(this._id, function (err) {
-            if (!err) {
+        // SERVER METHOD
+        // Folder : delete everything in it
+        // File : delete FS.File
+
+        Meteor.call('removeHostingObject', this, function (err) {
+            if (err) {
+                notification(err.reason);
+            } else {
                 Modal.hide('deleteHostingModal')
             }
         });
