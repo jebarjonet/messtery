@@ -49,9 +49,19 @@ UserSchema = new SimpleSchema({
         type: [String],
         optional: true
     },
-    isActivated: {
+    activated: {
         type: Boolean,
         optional: true
+    },
+    disabled: {
+        type: Boolean,
+        optional: true
+    }
+});
+
+Meteor.users.allow({
+    update: function (userId) {
+        return isAdmin(userId);
     }
 });
 

@@ -1,5 +1,5 @@
 Template.accounts.helpers({
-    usersCount: function() {
+    usersCount: function () {
         return this.count();
     },
     emailAddress: function () {
@@ -10,5 +10,18 @@ Template.accounts.helpers({
     },
     isActivated: function () {
         return isActivated(this);
+    },
+    isDisabled: function () {
+        return isDisabled(this);
+    }
+});
+
+Template.accounts.events({
+    'click .disable-action': function () {
+        Meteor.users.update({_id: this._id}, {
+            $set: {
+                disabled: !this.disabled
+            }
+        });
     }
 });

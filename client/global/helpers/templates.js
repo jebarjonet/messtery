@@ -19,9 +19,7 @@ Template.registerHelper('formatDate', function (date) {
 Template.registerHelper('isEmpty', function (data) {
     if (!data) {
         return true;
-    }
-
-    if (_.isArray(data)) {
+    } else if (_.isArray(data)) {
         // array
         return !data.length;
     } else {

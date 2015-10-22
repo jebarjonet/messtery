@@ -19,7 +19,7 @@ Meteor.methods({
             _id: user._id
         }, {
             $set: {
-                isActivated: true
+                activated: true
             }
         });
 

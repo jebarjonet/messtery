@@ -9,8 +9,10 @@
             <th>Role</th>
             <th>Email</th>
             <th>Active</th>
+            <th>Disabled</th>
             <th class="hidden-xs">Created</th>
             <th class="hidden-xs">Last connection</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -31,11 +33,23 @@
                         <span class="label label-danger">No</span>
                     {{/if}}
                 </td>
+                <td>
+                    {{#if isDisabled}}
+                        <span class="label label-danger">Yes</span>
+                    {{else}}
+                        <span class="label label-success">No</span>
+                    {{/if}}
+                </td>
                 <td class="hidden-xs">
                     {{formatDate createdAt}}
                 </td>
                 <td class="hidden-xs">
                     {{formatDate lastConnectionAt}}
+                </td>
+                <td>
+                    <button class="disable-action btn btn-xs {{#if isDisabled}}btn-success{{else}}btn-danger{{/if}}">
+                        {{#if isDisabled}}Enable{{else}}Disable{{/if}}
+                    </button>
                 </td>
             </tr>
         {{/each}}

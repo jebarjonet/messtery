@@ -69,4 +69,10 @@
         {{/each}}
         </tbody>
     </table>
+
+    {{#if isEmpty this}}
+        <p class="text-muted">
+            There is nothing in this folder.
+        </p>
+    {{/if}}
 </template>

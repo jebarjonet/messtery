@@ -4,6 +4,7 @@ Meteor.methods({
         if (doc.isFolder) {
             var children = findChildren(doc._id);
 
+            // recursively delete all folders in this folder
             var query = {$or: []};
             _.forEach(children.folders, function (folder) {
                 query.$or.push(folder._id);
@@ -11,6 +12,7 @@ Meteor.methods({
             query.$or.push(doc._id);
             HostingFolders.remove(query);
 
+            // recursively delete all files in this folder
             deleteFiles(children.files);
         } else {
             deleteFiles(doc);
@@ -18,6 +20,11 @@ Meteor.methods({
     }
 });
 
+/**
+ * Find children (folders and files) of a parent folder
+ * @param parentId
+ * @returns {{folders: *, files: *}}
+ */
 function findChildren(parentId) {
     var query = {
         parent: parentId
@@ -42,12 +49,17 @@ function findChildren(parentId) {
 function deleteFiles(hostingFiles) {
     hostingFiles = _.isArray(hostingFiles) ? hostingFiles : [hostingFiles];
 
+    if (!hostingFiles.length) {
+        return;
+    }
+
     var queryFiles = {$or: []};
     var queryHostingFiles = {$or: []};
     _.forEach(hostingFiles, function (hostingFile) {
         queryFiles.$or.push(hostingFile.file._id ? hostingFile.file._id : hostingFile.file);
         queryHostingFiles.$or.push(hostingFile._id);
     });
+
     Files.remove(queryFiles);
     HostingFiles.remove(queryHostingFiles);
 }
