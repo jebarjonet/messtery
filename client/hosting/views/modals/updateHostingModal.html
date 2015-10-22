@@ -1,0 +1,20 @@
+<template name="updateHostingModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        You are editing the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b>
+                        {{#unless isFolder}} ({{#with fileTypeToIcon}}{{title}}{{/with}}){{/unless}}
+                    </p>
+
+                    {{> quickForm schema="UpdateHostingForm" doc=this id="updateHostingForm"}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

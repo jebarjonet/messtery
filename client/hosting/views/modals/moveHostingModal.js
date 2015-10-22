@@ -16,7 +16,8 @@ Template.moveHostingModal.events({
         e.preventDefault();
         var target = $(e.target).data('target');
         var object = Template.currentData();
-        var query = {_id: object._id};
+
+        var Entity = object.isFolder ? HostingFolders : HostingFiles;
         var update = target ? {
             $set: {
                 parent: target
@@ -26,12 +27,13 @@ Template.moveHostingModal.events({
                 parent: ""
             }
         };
-        if (object.isFolder) {
-            HostingFolders.update(query, update);
-        } else {
-            HostingFiles.update(query, update);
-        }
-        Modal.hide('moveHostingModal');
+        Entity.update({
+            _id: object._id
+        }, update, function (err) {
+            if (!err) {
+                Modal.hide('moveHostingModal')
+            }
+        });
     }
 });
 
@@ -74,6 +76,7 @@ function findChildren(parent, selectedObject) {
 
     _.forEach(children, function (folder, index) {
         children[index].level = _.has(parent, 'level') ? parent.level + 1 : 0;
+        children[index].currentParent = folder._id === selectedObject.parent;
         children[index] = findChildren(folder, selectedObject);
     });
 

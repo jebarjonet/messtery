@@ -8,7 +8,8 @@
 
                 <div class="modal-body">
                     <p>
-                        Are you sure you want to delete the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b> ?
+                        Are you sure you want to delete the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b>
+                        {{#unless isFolder}}({{#with fileTypeToIcon}}{{title}}{{/with}}){{/unless}} ?
                     </p>
 
                     <button class="btn btn-danger">Confirm deletion</button>

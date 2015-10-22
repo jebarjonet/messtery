@@ -43,6 +43,9 @@ Template.listHosting.events({
     'click .move-action': function () {
         Modal.show('moveHostingModal', this);
     },
+    'click .update-action': function () {
+        Modal.show('updateHostingModal', this);
+    },
     'click .delete-action': function () {
         Modal.show('deleteHostingModal', this);
     }

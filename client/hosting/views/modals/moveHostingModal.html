@@ -8,10 +8,12 @@
 
                 <div class="modal-body">
                     <p>
-                        You are moving the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b>.
+                        You are moving the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b>
+                        {{#unless isFolder}} ({{#with fileTypeToIcon}}{{title}}{{/with}}){{/unless}}
                     </p>
 
-                    <a data-target=""><i>Root</i></a><br/>
+                    <a data-target="">{{#unless parent}}<b>Root</b>{{else}}Root{{/unless}}</a>
+                    <br/><br/>
                     {{#each foldersTree}}
                         {{> moveHostingModalChild}}
                     {{/each}}
@@ -26,8 +28,8 @@
 </template>
 
 <template name="moveHostingModalChild">
-    <span class="monospaced">{{levelPadding}}</span>
-    <a data-target="{{_id}}">{{name}}</a><br/>
+    <span class="monospaced text-muted">{{levelPadding}}</span>
+    <a data-target="{{_id}}">{{#if currentParent}}<b>{{name}}</b>{{else}}{{name}}{{/if}}</a><br/>
     {{#each children}}
         {{> moveHostingModalChild}}
     {{/each}}

@@ -4,18 +4,14 @@ InsertHostingFilesForm = new SimpleSchema({
         label: "Name",
         max: 300,
         autoform: {
-            afFieldInput: {
-                autocomplete: "off"
-            }
+            autocomplete: "off"
         }
     },
     file: {
         type: String,
         label: 'File',
         autoform: {
-            afFieldInput: {
-                type: "file"
-            }
+            type: "file"
         }
     },
     encrypted: {
