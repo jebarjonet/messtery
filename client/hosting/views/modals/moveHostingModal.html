@@ -1,0 +1,34 @@
+<template name="moveHostingModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Move</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        You are moving the {{#if isFolder}}folder{{else}}file{{/if}} <b>{{name}}</b>.
+                    </p>
+
+                    <a data-target=""><i>Root</i></a><br/>
+                    {{#each foldersTree}}
+                        {{> moveHostingModalChild}}
+                    {{/each}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="moveHostingModalChild">
+    <span class="monospaced">{{levelPadding}}</span>
+    <a data-target="{{_id}}">{{name}}</a><br/>
+    {{#each children}}
+        {{> moveHostingModalChild}}
+    {{/each}}
+</template>
