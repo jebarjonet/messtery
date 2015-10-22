@@ -27,15 +27,13 @@ HostingFiles.before.insert(function (userId, doc) {
 
 HostingFiles.allow({
     update: function (userId) {
-        //return !!userId;
-        return true;
+        return isAdmin(userId);
     },
     remove: function (userId) {
-        return !!userId;
+        return isAdmin(userId);
     },
     insert: function (userId) {
-        //return !!userId;
-        return true;
+        return isAdmin(userId);
     }
 });
 

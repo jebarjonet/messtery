@@ -1,7 +1,7 @@
 Meteor.methods({
     // updates a user profile when it changes its password
     changePasswordUser: function (encryption) {
-        EncryptionService.setUserEncryptionInfo(encryption, Meteor.userId());
+        EncryptionService.setUserEncryptionInfo(encryption, this.userId);
         return true;
     }
 });

@@ -13,12 +13,13 @@ HostingFoldersSchema = new SimpleSchema({
 
 HostingFolders.allow({
     update: function (userId) {
-        //return !!userId;
-        return true;
+        return isAdmin(userId);
+    },
+    remove: function (userId) {
+        return isAdmin(userId);
     },
     insert: function (userId) {
-        //return !!userId;
-        return true;
+        return isAdmin(userId);
     }
 });
 

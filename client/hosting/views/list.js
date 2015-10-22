@@ -39,5 +39,8 @@ Template.listHosting.events({
     },
     'click .information-action': function () {
         Modal.show('informationHostingModal', this);
+    },
+    'click .delete-action': function () {
+        Modal.show('deleteHostingModal', this);
     }
 });
