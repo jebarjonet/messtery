@@ -96,7 +96,7 @@ FileTypeToIconConfig = [
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
             'application/msword',
-            'text-plain'
+            'text/plain'
         ],
         icon: 'file-text-o',
         title: 'Text'

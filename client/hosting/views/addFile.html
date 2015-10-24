@@ -14,10 +14,10 @@
         {{> afQuickField name="file"}}
         {{> afQuickField name="encrypted"}}
 
-        {{#if needsSessionInfo}}
-            <button type="button" class="btn btn-default" id="setSessionInfo">Set session encryption keys</button>
+        {{#if needsEncryption}}
+            {{> submitIfSessionKeys}}
+        {{else}}
+            <button type="submit" class="btn btn-primary">Submit</button>
         {{/if}}
-
-        <button type="submit" class="btn btn-primary" {{submitButtonDisabled}}>Submit</button>
     {{/autoForm}}
 </template>

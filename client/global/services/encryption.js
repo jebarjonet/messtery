@@ -23,12 +23,12 @@ EncryptionService = {
             return;
         }
 
-        EncryptionService.forgetSessionInfo();
+        EncryptionService.forgetSessionKeys();
         return EncryptionService.setupUserEncryptionInfo(newPassword, key);
     },
     encryptFile: function (content) {
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getSessionInfo();
+        var passwordValidator = EncryptionService.getSessionKeys();
 
         if (!passwordValidator) {
             notification('Should have decrypted user encryption info before running this function');
@@ -47,14 +47,14 @@ EncryptionService = {
         });
     },
     decryptFile: function (content) {
-        var sessionInfo = EncryptionService.getSessionInfo();
-        if (!sessionInfo) {
+        var sessionKeys = EncryptionService.getSessionKeys();
+        if (!sessionKeys) {
             EncryptionService.askUserPassword();
             return;
         }
 
         var encryption = Meteor.user().encryption;
-        var passwordValidator = EncryptionService.getSessionInfo();
+        var passwordValidator = EncryptionService.getSessionKeys();
 
         if (!passwordValidator) {
             notification('Should have decrypted user encryption info before running this function');
@@ -160,7 +160,7 @@ EncryptionService = {
      * Return session info needed for encryption
      * @returns {any}
      */
-    getSessionInfo: function () {
+    getSessionKeys: function () {
         return Session.get('passwordValidator');
     },
     /**
@@ -173,16 +173,16 @@ EncryptionService = {
      * Pass a function that needs session info after session info is calculated
      * @param cb
      */
-    needSessionInfo: function (cb) {
+    needSessionKeys: function (cb) {
         EncryptionService.pendingFunction = cb;
-        if (!EncryptionService.getSessionInfo()) {
+        if (!EncryptionService.getSessionKeys()) {
             EncryptionService.askUserPassword();
         } else {
             EncryptionService.executePendingFunction();
         }
     },
     /**
-     * Execute the pending function previously passed in needSessionInfo() if exists
+     * Execute the pending function previously passed in needSessionKeys() if exists
      */
     executePendingFunction: function () {
         if (_.isFunction(EncryptionService.pendingFunction)) {
@@ -193,11 +193,11 @@ EncryptionService = {
     /**
      * Forget the current session info
      */
-    forgetSessionInfo: function () {
+    forgetSessionKeys: function () {
         Session.set('passwordValidator', undefined);
     },
     /**
-     * Store the pending function passed in needSessionInfo()
+     * Store the pending function passed in needSessionKeys()
      */
     pendingFunction: undefined
 };

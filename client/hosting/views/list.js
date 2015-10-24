@@ -14,7 +14,7 @@ Template.listHosting.events({
         var self = this;
         var url = this.file.url();
 
-        EncryptionService.needSessionInfo(function () {
+        EncryptionService.needSessionKeys(function () {
             var downloadNotification = notification('Downloading...', 'info', {timeout: 'none'});
             HTTP.get(url, {}, function (err, result) {
                 sAlert.close(downloadNotification);

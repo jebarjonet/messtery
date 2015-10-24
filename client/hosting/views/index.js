@@ -58,8 +58,8 @@ Template.hosting.helpers({
     searchQuery: function () {
         return getCurrentSearchQuery();
     },
-    forgetSessionInfoDisabled: function () {
-        return EncryptionService.getSessionInfo() ? '' : 'disabled';
+    forgetSessionKeysDisabled: function () {
+        return EncryptionService.getSessionKeys() ? '' : 'disabled';
     }
 });
 
@@ -74,8 +74,8 @@ Template.hosting.events({
             });
         }
     },
-    'click #forgetSessionInfo': function () {
-        EncryptionService.forgetSessionInfo();
+    'click #forgetSessionKeys': function () {
+        EncryptionService.forgetSessionKeys();
     }
 });
 

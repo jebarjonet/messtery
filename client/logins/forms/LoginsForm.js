@@ -1,5 +1,5 @@
-InsertHostingFilesForm = new SimpleSchema({
-    name: {
+LoginsForm = new SimpleSchema({
+    domain: {
         type: String,
         max: 300,
         autoform: {

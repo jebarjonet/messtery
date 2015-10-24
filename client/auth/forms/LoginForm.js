@@ -11,7 +11,6 @@ LoginForm = new SimpleSchema({
     },
     password: {
         type: String,
-        label: "Password",
         autoform: {
             type: "password"
         }

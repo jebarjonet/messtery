@@ -12,7 +12,8 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
-                        <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">File hosting</a></li>
+                        <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">Files</a></li>
+                        <li class="{{isActiveRoute regex='logins'}}"><a href="{{pathFor 'logins'}}">Logins</a></li>
                         <li class="{{isActiveRoute regex='accounts'}}"><a href="{{pathFor 'accounts'}}">Accounts</a></li>
                     {{else}}
                         <li class="{{isActiveRoute 'login'}}"><a href="{{pathFor 'login'}}">Login</a></li>

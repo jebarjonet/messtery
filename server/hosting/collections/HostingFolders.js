@@ -1,6 +1,6 @@
 HostingFolders = new Mongo.Collection("hostingfolders");
 
-HostingFoldersSchema = new SimpleSchema({
+HostingFolderSchema = new SimpleSchema({
     name: {
         type: String,
         max: 300
@@ -20,4 +20,4 @@ HostingFolders.allow({
     }
 });
 
-HostingFolders.attachSchema(HostingFoldersSchema);
+HostingFolders.attachSchema(HostingFolderSchema);

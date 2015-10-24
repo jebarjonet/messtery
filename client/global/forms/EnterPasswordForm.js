@@ -4,7 +4,8 @@ EnterPasswordForm = new SimpleSchema({
         label: "Your password",
         autoform: {
             type: "password",
-            autofocus: true
+            autofocus: true,
+            autocomplete: "off"
         }
     }
 });

@@ -1,0 +1,7 @@
+<template name="submitIfSessionKeys">
+    {{#if needsSessionKeys}}
+        <button type="button" class="btn btn-default set-session-keys-action">Set session encryption keys</button>
+    {{/if}}
+
+    <button type="submit" class="btn btn-primary" {{submitButtonDisabled}}>Submit</button>
+</template>

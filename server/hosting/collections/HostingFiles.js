@@ -1,6 +1,6 @@
 HostingFiles = new Mongo.Collection("hostingfiles");
 
-HostingFilesSchema = new SimpleSchema({
+HostingFileSchema = new SimpleSchema({
     name: {
         type: String,
         max: 300
@@ -34,4 +34,4 @@ HostingFiles.allow({
     }
 });
 
-HostingFiles.attachSchema(HostingFilesSchema);
+HostingFiles.attachSchema(HostingFileSchema);
