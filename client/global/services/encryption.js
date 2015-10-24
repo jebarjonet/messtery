@@ -26,7 +26,13 @@ EncryptionService = {
         EncryptionService.forgetSessionKeys();
         return EncryptionService.setupUserEncryptionInfo(newPassword, key);
     },
-    encryptFile: function (content) {
+    /**
+     * Encrypt content with user key and data salt
+     * @param content
+     * @param salt
+     * @returns {string}
+     */
+    encrypt: function (content, salt) {
         var encryption = Meteor.user().encryption;
         var passwordValidator = EncryptionService.getSessionKeys();
 
@@ -38,7 +44,15 @@ EncryptionService = {
         var keyEncrypter = passwordValidator[0];
 
         var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
-        var encrypted = CryptoJS.AES.encrypt(content, key).toString();
+        return CryptoJS.AES.encrypt(content, key + salt).toString();
+    },
+    encryptFile: function (content, salt) {
+        var encrypted = EncryptionService.encrypt(content, salt);
+
+        if (!encrypted) {
+            return;
+        }
+
         var name = EncryptionService.generateHexString(32);
 
         return new File([encrypted], name, {
@@ -46,7 +60,13 @@ EncryptionService = {
             lastModified: new Date()
         });
     },
-    decryptFile: function (content) {
+    /**
+     * Decrypt content with user key and data salt
+     * @param content
+     * @param salt
+     * @returns {string}
+     */
+    decrypt: function (content, salt) {
         var sessionKeys = EncryptionService.getSessionKeys();
         if (!sessionKeys) {
             EncryptionService.askUserPassword();
@@ -69,7 +89,10 @@ EncryptionService = {
         }
 
         var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
-        var decryptedFile = CryptoJS.AES.decrypt(content, key).toString(CryptoJS.enc.Latin1);
+        return CryptoJS.AES.decrypt(content, key + salt).toString(CryptoJS.enc.Latin1);
+    },
+    decryptFile: function (content, salt) {
+        var decryptedFile = EncryptionService.decrypt(content, salt);
 
         if (!/^data:/.test(decryptedFile)) {
             notification('Invalid key or file. Please try again');
@@ -126,12 +149,12 @@ EncryptionService = {
         return key;
     },
     /**
-     * Return a combination between the password and the salt
+     * Return a combination between user password and user salt
      * @param password
      * @param salt
      * @returns {string}
      */
-    passwordAndSalt: function (password, salt) {
+    userPasswordAndSalt: function (password, salt) {
         return CryptoJS.EvpKDF(password, salt, {keySize: 16}).toString();
     },
     /**
@@ -153,8 +176,15 @@ EncryptionService = {
      * @returns {*|*[]}
      */
     getPasswordValidator: function (password, salt) {
-        var passwordValidator = EncryptionService.passwordAndSalt(password, salt);
+        var passwordValidator = EncryptionService.userPasswordAndSalt(password, salt);
         return EncryptionService.splitStringInHalf(passwordValidator);
+    },
+    /**
+     * Generates a string userd as salt for data encryption (not user side)
+     * @returns {*|string}
+     */
+    generateDataSalt: function () {
+        return EncryptionService.generateHexString(32);
     },
     /**
      * Return session info needed for encryption

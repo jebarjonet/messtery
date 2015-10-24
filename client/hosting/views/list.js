@@ -26,7 +26,7 @@ Template.listHosting.events({
 
                 // long JS action freezing other JS scripts
                 Meteor.setTimeout(function () {
-                    var decrypted = EncryptionService.decryptFile(result.content);
+                    var decrypted = EncryptionService.decryptFile(result.content, self.salt);
                     sAlert.close(decryptNotification);
 
                     if (decrypted) {

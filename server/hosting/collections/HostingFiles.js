@@ -18,6 +18,10 @@ HostingFileSchema = new SimpleSchema({
     },
     encrypted: {
         type: Boolean
+    },
+    salt: {
+        type: String,
+        optional: true
     }
 });
 

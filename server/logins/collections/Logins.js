@@ -11,6 +11,9 @@ LoginSchema = new SimpleSchema({
     },
     password: {
         type: String
+    },
+    salt: {
+        type: String
     }
 });
 
@@ -21,7 +24,7 @@ Logins.allow({
     insert: function (userId) {
         return isAdmin(userId);
     },
-    remove: function (userId) {
+    insert: function (userId) {
         return isAdmin(userId);
     }
 });

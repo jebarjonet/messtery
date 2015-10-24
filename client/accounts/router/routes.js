@@ -1,7 +1,7 @@
 Router.map(function () {
     this.route('/accounts', {
         waitOn: sub,
-        data: function() {
+        data: function () {
             return Meteor.users.find({}, {
                 sort: {
                     createdAt: 1

@@ -61,7 +61,8 @@ function uploadFile(doc, cbSuccess, cbError) {
 
             // long JS action freezing other JS scripts
             Meteor.setTimeout(function () {
-                result = EncryptionService.encryptFile(result);
+                doc.salt = EncryptionService.generateDataSalt();
+                result = EncryptionService.encryptFile(result, doc.salt);
                 sAlert.close(encryptNotification);
                 saveResult(result, cbSuccess, cbError);
             }, 500);

@@ -1,19 +1,16 @@
 LoginsForm = new SimpleSchema({
     domain: {
         type: String,
-        max: 300,
-        autoform: {
-            autofocus: true,
-            autocomplete: "off"
-        }
+        max: 300
     },
-    file: {
+    identifier: {
+        type: String,
+        max: 300
+    },
+    password: {
         type: String,
         autoform: {
-            type: "file"
+            type: "password"
         }
-    },
-    encrypted: {
-        type: Boolean
     }
 });

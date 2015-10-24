@@ -1,0 +1,14 @@
+<template name="addLogins">
+    <h1>
+        Add a login
+        <a class="btn btn-default pull-right" href="{{pathFor 'logins'}}"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </h1>
+
+    {{#autoForm collection="Logins" schema="LoginsForm" id="insertLoginsForm" type="insert"}}
+        {{> afQuickField name="domain"}}
+        {{> afQuickField name="identifier"}}
+        {{> afQuickField name="password"}}
+
+        {{> submitIfSessionKeys}}
+    {{/autoForm}}
+</template>

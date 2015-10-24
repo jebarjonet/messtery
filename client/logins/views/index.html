@@ -1,0 +1,37 @@
+<template name="logins">
+    <div class="row-grid">
+        <a href="{{pathFor 'logins.add'}}" class="btn btn-default">
+            New login
+        </a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Identifier</th>
+            <th class="hidden-xs">Password</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each this}}
+            <tr>
+                <td>{{domain}}</td>
+                <td>{{identifier}}</td>
+                <td class="hidden-xs">********</td>
+                <td>
+                    <button class="show-action btn btn-xs btn-info">Show</button>
+                    <button class="edit-action btn btn-xs btn-warning">Edit</button>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    {{#if isEmpty this}}
+        <p class="text-muted">
+            There is no login registered for now.
+        </p>
+    {{/if}}
+</template>
