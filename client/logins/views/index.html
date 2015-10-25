@@ -3,13 +3,16 @@
         <a href="{{pathFor 'logins.add'}}" class="btn btn-default">
             New login
         </a>
+        <button id="forget-session-keys" class="btn btn-default pull-right" {{forgetSessionKeysDisabled}}>
+            Forget keys
+        </button>
     </div>
 
     <table class="table table-hover">
         <thead>
         <tr>
             <th>Domain</th>
-            <th>Identifier</th>
+            <th class="hidden-xs">Identifier</th>
             <th class="hidden-xs">Password</th>
             <th></th>
         </tr>
@@ -18,11 +21,19 @@
         {{#each this}}
             <tr>
                 <td>{{domain}}</td>
-                <td>{{identifier}}</td>
+                <td class="hidden-xs">{{identifier}}</td>
                 <td class="hidden-xs">********</td>
                 <td>
-                    <button class="show-action btn btn-xs btn-info">Show</button>
-                    <button class="edit-action btn btn-xs btn-warning">Edit</button>
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="show-action"><a><i class="fa fa-fw fa-eye"></i> Show</a></li>
+                            <li class="update-action"><a><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                            <li class="delete-action"><a><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         {{/each}}

@@ -16,7 +16,7 @@ EncryptionService = {
         var encryption = Meteor.user().encryption;
         var passwordValidator = EncryptionService.getPasswordValidator(oldPassword, encryption.salt);
         var keyEncrypter = passwordValidator[0];
-        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
+        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Utf8);
 
         if (encryption.passwordValidator !== passwordValidator[1]) {
             notification('Wrong current password');
@@ -43,7 +43,7 @@ EncryptionService = {
 
         var keyEncrypter = passwordValidator[0];
 
-        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
+        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Utf8);
         return CryptoJS.AES.encrypt(content, key + salt).toString();
     },
     encryptFile: function (content, salt) {
@@ -88,8 +88,8 @@ EncryptionService = {
             return;
         }
 
-        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Latin1);
-        return CryptoJS.AES.decrypt(content, key + salt).toString(CryptoJS.enc.Latin1);
+        var key = CryptoJS.AES.decrypt(encryption.key, keyEncrypter, {iv: encryption.iv}).toString(CryptoJS.enc.Utf8);
+        return CryptoJS.AES.decrypt(content, key + salt).toString(CryptoJS.enc.Utf8);
     },
     decryptFile: function (content, salt) {
         var decryptedFile = EncryptionService.decrypt(content, salt);

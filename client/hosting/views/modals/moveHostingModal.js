@@ -31,7 +31,7 @@ Template.moveHostingModal.events({
             _id: object._id
         }, update, function (err) {
             if (!err) {
-                Modal.hide('moveHostingModal')
+                Modal.hide()
             }
         });
     }

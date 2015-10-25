@@ -74,7 +74,7 @@ Template.hosting.events({
             });
         }
     },
-    'click #forgetSessionKeys': function () {
+    'click #forget-session-keys': function () {
         EncryptionService.forgetSessionKeys();
     }
 });

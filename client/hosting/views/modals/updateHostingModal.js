@@ -11,8 +11,9 @@ AutoForm.addHooks('updateHostingForm', {
             $set: doc
         }, function (err) {
             if (!err) {
-                Modal.hide('updateHostingModal')
+                Modal.hide();
             }
+
             self.done(err);
         });
     }

@@ -29,7 +29,28 @@ formatBytes = function (bytes, decimals) {
 };
 
 // check if (current user or passed userId) is admin
-isAdmin = function(userId) {
+isAdmin = function (userId) {
     var user = userId ? Meteor.users.findOne(userId) : Meteor.user();
     return user && user.roles && _.includes(user.roles, 'admin');
+};
+
+// returns the parent template view searched by name according to current view
+// getInstance : if true, returns the template instance of found view
+// ex: on Autoform hook in modal : findParentTemplate('updateLoginModal', this.template, true) returns the modal instance
+findParentTemplate = function (name, currentView, getInstance) {
+    if (!name || !currentView) {
+        return undefined;
+    }
+
+    if (currentView.view) {
+        currentView = currentView.view;
+    }
+
+    if (!currentView.parentView) {
+        return undefined;
+    } else if (currentView.parentView.name === 'Template.' + name) {
+        return getInstance ? currentView.parentView.templateInstance() : currentView.parentView;
+    } else {
+        return findParentTemplate(name, currentView.parentView, getInstance);
+    }
 };

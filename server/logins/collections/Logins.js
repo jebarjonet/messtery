@@ -24,7 +24,7 @@ Logins.allow({
     insert: function (userId) {
         return isAdmin(userId);
     },
-    insert: function (userId) {
+    remove: function (userId) {
         return isAdmin(userId);
     }
 });

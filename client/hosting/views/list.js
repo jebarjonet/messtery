@@ -38,7 +38,7 @@ Template.listHosting.events({
         });
     },
     'click .information-action': function () {
-        Modal.show('informationHostingModal', this);
+        Modal.show('showHostingModal', this);
     },
     'click .move-action': function () {
         Modal.show('moveHostingModal', this);

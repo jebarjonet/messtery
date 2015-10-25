@@ -10,7 +10,7 @@ AutoForm.addHooks('enterPasswordForm', {
             return;
         }
 
-        Modal.hide();
+        Modal.hide(findParentTemplate('enterPasswordModal', this.template, true));
         Session.set('passwordValidator', passwordValidator);
         EncryptionService.executePendingFunction();
         this.done();

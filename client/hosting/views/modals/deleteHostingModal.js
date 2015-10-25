@@ -4,7 +4,7 @@ Template.deleteHostingModal.events({
             if (err) {
                 notification(err.reason);
             } else {
-                Modal.hide('deleteHostingModal')
+                Modal.hide()
             }
         });
     }

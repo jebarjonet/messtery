@@ -19,3 +19,6 @@ AutoForm.addHooks(null, {
         }
     }
 });
+
+// Modals options
+Modal.allowMultiple = true;

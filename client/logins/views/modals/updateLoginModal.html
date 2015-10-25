@@ -1,0 +1,19 @@
+<template name="updateLoginModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        You are editing the login data of <b>{{domain}}</b>
+                    </p>
+
+                    {{> quickForm collection="Logins" schema="LoginsForm" doc=this id="updateLoginForm" type="update"}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
