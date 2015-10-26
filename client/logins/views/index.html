@@ -1,4 +1,15 @@
 <template name="logins">
+    <div class="row row-grid">
+        <div class="col-md-6">
+            <form class="input-group" name="search">
+                <input type="text" class="form-control" placeholder="Search..." value="{{searchQuery}}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </form>
+        </div>
+    </div>
+
     <div class="row-grid">
         <a href="{{pathFor 'logins.add'}}" class="btn btn-default">
             New login
@@ -18,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#each this}}
+        {{#each logins}}
             <tr>
                 <td>{{domain}}</td>
                 <td class="hidden-xs">{{identifier}}</td>
@@ -40,7 +51,7 @@
         </tbody>
     </table>
 
-    {{#if isEmpty this}}
+    {{#if isEmpty logins}}
         <p class="text-muted">
             There is no login registered for now.
         </p>

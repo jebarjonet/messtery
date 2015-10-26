@@ -1,13 +1,6 @@
 Router.map(function () {
     this.route('/logins', {
-        waitOn: sub,
-        data: function () {
-            return Logins.find({}, {
-                sort: {
-                    domain: 1
-                }
-            });
-        }
+        waitOn: sub
     });
     this.route('/logins/add', {
         name: 'logins.add'
