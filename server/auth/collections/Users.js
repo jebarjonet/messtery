@@ -62,6 +62,9 @@ UserSchema = new SimpleSchema({
 Meteor.users.allow({
     update: function (userId) {
         return isAdmin(userId);
+    },
+    remove: function (userId, user) {
+        return isAdmin(userId) && !isAdmin(user._id);
     }
 });
 

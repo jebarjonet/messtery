@@ -23,5 +23,8 @@ Template.accounts.events({
                 disabled: !this.disabled
             }
         });
+    },
+    'click .delete-action': function () {
+        Modal.show('deleteAccountModal', this);
     }
 });

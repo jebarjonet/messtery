@@ -50,9 +50,7 @@ Template.logins.events({
         var self = this;
 
         EncryptionService.needSessionKeys(function () {
-            //Meteor.setTimeout(function () {
             Modal.show('updateLoginModal', decryptedLogin(self));
-            //}, 350);
         });
     },
     'click #forget-session-keys': function () {

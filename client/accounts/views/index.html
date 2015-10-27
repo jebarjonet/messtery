@@ -1,7 +1,13 @@
 <template name="accounts">
-    <p>
-        Currently {{usersCount}} member{{pluralize usersCount}}
-    </p>
+    <div class="row-grid">
+        <a href="{{pathFor 'accounts.enroll'}}" class="btn btn-default">
+            Enroll user
+        </a>
+
+        <p class="pull-right">
+            Currently {{usersCount}} user{{pluralize usersCount}}
+        </p>
+    </div>
 
     <table class="table table-hover">
         <thead>
@@ -22,7 +28,7 @@
                     {{#if isAdmin}}
                         <span class="label label-primary">Admin</span>
                     {{else}}
-                        <span class="label label-sober">Member</span>
+                        <span class="label label-sober">User</span>
                     {{/if}}
                 </td>
                 <td>{{emailAddress}}</td>
@@ -47,9 +53,23 @@
                     {{formatDate lastConnectionAt}}
                 </td>
                 <td>
-                    <button class="disable-action btn btn-xs {{#if isDisabled}}btn-success{{else}}btn-danger{{/if}}">
-                        {{#if isDisabled}}Enable{{else}}Disable{{/if}}
-                    </button>
+                    {{#unless isAdmin}}
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="disable-action"><a>
+                                    {{#if isDisabled}}
+                                        <i class="fa fa-fw fa-toggle-on"></i> Enable
+                                    {{else}}
+                                        <i class="fa fa-fw fa-toggle-off"></i> Disable
+                                    {{/if}}
+                                </a></li>
+                                <li class="delete-action"><a><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                            </ul>
+                        </div>
+                    {{/unless}}
                 </td>
             </tr>
         {{/each}}

@@ -9,6 +9,7 @@ Router.map(function () {
             });
         }
     });
+    this.route('/accounts/enroll');
 });
 
 function sub() {
