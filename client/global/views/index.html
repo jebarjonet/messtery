@@ -1,3 +1,31 @@
 <template name="index">
-    Start
+    <h2>Uses</h2>
+
+    <div class="row">
+        {{#each uses}}
+            {{> featureIndex}}
+        {{/each}}
+    </div>
+
+    <h2>Features</h2>
+
+    <div class="row">
+        {{#each features}}
+            {{> featureIndex}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="featureIndex">
+    <div class="col-sm-6 col-md-4">
+        <div class="media" style="margin-bottom: 20px;">
+            <div class="media-left">
+                <i class="media-object fa fa-fw fa-{{icon}}"></i>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">{{title}}</h3>
+                {{{description}}}
+            </div>
+        </div>
+    </div>
 </template>

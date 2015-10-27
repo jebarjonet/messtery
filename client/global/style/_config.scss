@@ -1,6 +1,7 @@
 /*
     Customization of libraries
 */
+// sAlert
 .s-alert {
     &-success {
         background-color: #1D9E74;
@@ -15,9 +16,19 @@
     }
 }
 
+// Bootstrap
 .label {
     &-sober {
         color: #777;
         background-color: #fff;
     }
+}
+
+.fa.media-object {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 26px;
+    background: #EEEEEE;
+    color: #AAAAAA;
 }
