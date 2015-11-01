@@ -17,7 +17,9 @@ GeocodingService = {
                 return;
             }
 
-            var location = res.data.results[0].geometry.location;
+            var result = res.data.results[0];
+            var location = result.geometry.location;
+            location.address = result.formatted_address;
 
             cb(location);
         });

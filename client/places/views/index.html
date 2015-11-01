@@ -1,4 +1,15 @@
 <template name="places">
+    <div class="row row-grid">
+        <div class="col-md-6">
+            <form class="input-group" name="search">
+                <input type="text" class="form-control" placeholder="Search..." value="{{searchQuery}}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </form>
+        </div>
+    </div>
+
     <div class="row-grid">
         <a href="{{pathFor 'places.add'}}" class="btn btn-default">
             New place
@@ -6,10 +17,50 @@
         <a href="{{pathFor 'places.categories'}}" class="btn btn-default">
             Categories
         </a>
-        <a href="{{pathFor 'places.categories.add'}}" class="btn btn-default">
-            New category
-        </a>
     </div>
 
-    <div id="map" style="min-height: 300px; height: 100vh; max-height: 500px;"></div>
+    {{#if isSearching}}
+        <table class="table table-hover table-vertical-middle">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th class="hidden-xs">Address</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each places}}
+                <tr>
+                    <td style="width: 32px;">
+                        {{#with category}}
+                            <div class="leaflet-icon leaflet-icon-xs" style="background-color:{{color}};"><i
+                                    class="fa fa-{{icon}}"></i></div>
+                        {{/with}}
+                    </td>
+                    <td>
+                        {{name}}
+                    </td>
+                    <td class="hidden-xs">
+                        {{address}}
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-default" href="{{pathFor route="places.edit" data=updateLinkData}}">
+                            <i class="fa fa-fw fa-pencil"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+        {{#if isEmpty places}}
+            <p class="text-muted">
+                There is no place corresponding to your search.
+            </p>
+        {{/if}}
+    {{/if}}
+
+    <div id="map"
+         style="min-height: 300px; height: 100vh; max-height: 500px;{{#if isSearchingAndLoaded}}display: none;{{/if}}"></div>
 </template>

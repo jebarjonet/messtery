@@ -1,4 +1,7 @@
-var map, formData;
+var map, formData, draggableMarkerOptions = {
+    draggable: true,
+    onDrag: updateFormCoordinates
+};
 
 Template.placesForm.hooks({
     created: function () {
@@ -23,26 +26,17 @@ Template.placesForm.hooks({
         map = MapService.setMap('map');
 
         // mark place if editing
-        var editedPlace = getEditedPlace(), marker;
+        var editedPlace = getEditedPlace();
         if (editedPlace) {
-            MapService.markAndShow(editedPlace.lat, editedPlace.lng, map, {
-                draggable: true,
-                onDrag: updateFormCoordinates
-            });
+            MapService.markAndShow(editedPlace.lat, editedPlace.lng, map, draggableMarkerOptions);
         } else {
-            MapService.markAndShow(appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng, map, {
-                draggable: true,
-                onDrag: updateFormCoordinates
-            });
+            MapService.markAndShow(appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng, map, draggableMarkerOptions);
         }
 
         // mark place when changing lat or lng fields
         Tracker.autorun(function () {
             if (AutoForm.getFieldValue("lat", formData.id) && AutoForm.getFieldValue("lng", formData.id)) {
-                MapService.markAndShow(AutoForm.getFieldValue("lat", formData.id), AutoForm.getFieldValue("lng", formData.id), map, {
-                    draggable: true,
-                    onDrag: updateFormCoordinates
-                });
+                MapService.markAndShow(AutoForm.getFieldValue("lat", formData.id), AutoForm.getFieldValue("lng", formData.id), map, draggableMarkerOptions);
             }
         });
     }
@@ -64,7 +58,8 @@ Template.placesForm.events({
             GeocodingService.geocode(address, function (res) {
                 if (res) {
                     updateFormCoordinates({latlng: res});
-                    MapService.markAndShow(res.lat, res.lng, map);
+                    $('form [name="address"]').val(res.address);
+                    MapService.markAndShow(res.lat, res.lng, map, draggableMarkerOptions);
                 }
             });
         }

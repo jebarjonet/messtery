@@ -4,11 +4,19 @@ MapService = {
      * @param idMap
      * @returns {*}
      */
-    setMap: function (idMap) {
+    setMap: function (idMap, onLoad) {
         L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
         var map = L.map(idMap, {
             attributionControl: false
-        }).setView([appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng], 11);
+        });
+
+        if (onLoad) {
+            map.on('load', function (e) {
+                onLoad(e);
+            });
+        }
+
+        map.setView([appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng], 12);
         L.tileLayer.provider("OpenStreetMap.Mapnik").addTo(map);
         return map;
     },
@@ -64,14 +72,9 @@ MapService = {
      * @param options
      */
     markAndShow: function (lat, lng, map, options) {
-        var count = 0;
-
         // clear map
-        map.eachLayer(function (layer) {
-            count++;
-            if (count > 1) {
-                map.removeLayer(layer);
-            }
+        _.forEach(MapService.getMarkersOnMap(map), function (marker) {
+            map.removeLayer(marker);
         });
 
         // add new marker
@@ -87,5 +90,10 @@ MapService = {
                 animate: true
             }
         );
+    },
+    getMarkersOnMap: function (map) {
+        return _.omit(map._layers, function (layer) {
+            return !layer._icon;
+        });
     }
 };

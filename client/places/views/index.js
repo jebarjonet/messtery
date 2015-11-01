@@ -1,10 +1,18 @@
 var map;
+// track if map is loaded (map does not load correctly if it loads while being "display: none" during search)
+var mapLoaded = new ReactiveVar(false);
 
 Template.places.hooks({
+    created: function () {
+        mapLoaded.set(false);
+    },
     rendered: function () {
-        map = MapService.setMap('map');
+        // create map
+        map = MapService.setMap('map', function () {
+            mapLoaded.set(true);
+        });
 
-        // observe places
+        // observe places to put on map
         Places.find().observe({
             added: function (place) {
                 addPlace(place);
@@ -17,6 +25,45 @@ Template.places.hooks({
                 removePlace(oldPlace);
             }
         });
+    }
+});
+
+Template.places.helpers({
+    updateLinkData: function () {
+        return {id: this._id};
+    },
+    isSearching: function () {
+        return getCurrentSearchQuery();
+    },
+    isSearchingAndLoaded: function () {
+        return getCurrentSearchQuery() && mapLoaded.get();
+    },
+    places: function () {
+        return Places.find({
+            name: {
+                $regex: getCurrentSearchQuery(),
+                $options: "i"
+            }
+        });
+    },
+    category: function () {
+        return PlacesCategories.findOne(this.category);
+    },
+    searchQuery: function () {
+        return getCurrentSearchQuery();
+    }
+});
+
+Template.places.events({
+    'submit form[name="search"]': function (e) {
+        e.preventDefault();
+        if (!getFormSearchQuery()) {
+            Router.go('places');
+        } else {
+            Router.go('places', {}, {
+                query: 's=' + getFormSearchQuery()
+            });
+        }
     }
 });
 
@@ -39,4 +86,12 @@ function removePlace(oldPlace) {
             }
         }
     });
+}
+
+function getFormSearchQuery() {
+    return $('form[name="search"] input').val();
+}
+
+function getCurrentSearchQuery() {
+    return Router.current().params.query.s;
 }

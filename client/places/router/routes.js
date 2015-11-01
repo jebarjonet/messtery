@@ -16,7 +16,11 @@ Router.map(function () {
         name: 'places.categories',
         waitOn: sub,
         data: function () {
-            return PlacesCategories.find();
+            return PlacesCategories.find({}, {
+                sort: {
+                    name: 1
+                }
+            });
         }
     });
     this.route('/places/categories/add', {

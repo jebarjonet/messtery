@@ -10,7 +10,11 @@ PlacesForm = new SimpleSchema({
         type: String,
         autoform: {
             options: function () {
-                return PlacesCategories.find().map(function (c) {
+                return PlacesCategories.find({}, {
+                    sort: {
+                        name: 1
+                    }
+                }).map(function (c) {
                     return {
                         label: c.name,
                         value: c._id
@@ -30,7 +34,9 @@ PlacesForm = new SimpleSchema({
     address: {
         type: String,
         autoform: {
-            autocomplete: "off"
+            autocomplete: "off",
+            // prevent submitting form when pressing Enter on this field
+            onkeydown: 'if (event.keyCode == 13) {return false}'
         }
     },
     lat: {
