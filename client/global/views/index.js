@@ -9,7 +9,12 @@ Template.index.helpers({
             {
                 icon: "unlock-alt",
                 title: "Logins",
-                description: "\"Hard to remember\" identifiers and passwords. They are kept encrypted in database. Simple secured memo."
+                description: "\"Hard to remember\" identifiers and passwords are kept encrypted in database. Simple secured memo."
+            },
+            {
+                icon: "map-marker",
+                title: "Places",
+                description: "Places needing their memo, maybe an address, a door code or even contact location."
             },
             {
                 icon: "users",

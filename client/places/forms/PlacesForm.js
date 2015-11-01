@@ -17,7 +17,7 @@ PlacesForm = new SimpleSchema({
                     };
                 });
             },
-            firstOption: '(Chose a category)'
+            firstOption: '(Choose a category)'
         }
     },
     text: {
