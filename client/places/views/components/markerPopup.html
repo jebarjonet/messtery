@@ -1,0 +1,22 @@
+<template name="markerPopup">
+    <h5>{{name}}</h5>
+
+    <p>
+        {{address}}
+    </p>
+
+    {{#unless isEmpty text}}
+        <p>
+            {{text}}
+        </p>
+    {{/unless}}
+
+    <div>
+        <a class="btn btn-xs btn-default" href="{{pathFor route="places.edit" data=updateLinkData}}">
+            <i class="fa fa-fw fa-pencil"></i> Edit
+        </a>
+        <button class="btn btn-xs btn-danger pull-right delete-action">
+            <i class="fa fa-fw fa-trash-o"></i> Delete
+        </button>
+    </div>
+</template>

@@ -13,7 +13,7 @@ UserEncryptionSchema = new SimpleSchema({
     }
 });
 
-UserSchema = new SimpleSchema({
+UsersSchema = new SimpleSchema({
     emails: {
         type: Array,
         optional: true
@@ -59,13 +59,6 @@ UserSchema = new SimpleSchema({
     }
 });
 
-Meteor.users.allow({
-    update: function (userId) {
-        return isAdmin(userId);
-    },
-    remove: function (userId, user) {
-        return isAdmin(userId) && !isAdmin(user._id);
-    }
-});
+Meteor.users.allow(adminAllow('update remove'));
 
-Meteor.users.attachSchema(UserSchema);
+Meteor.users.attachSchema(UsersSchema);

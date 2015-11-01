@@ -4,7 +4,7 @@ Meteor.methods({
      */
     bootApp: function () {
         if (!Meteor.users.find().count()) {
-            if (!Meteor.settings.owner) {
+            if (!Meteor.settings.owner.emailAddress) {
                 return "Please complete settings.json file";
             }
 

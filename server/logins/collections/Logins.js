@@ -1,6 +1,6 @@
 Logins = new Mongo.Collection("logins");
 
-LoginSchema = new SimpleSchema({
+LoginsSchema = new SimpleSchema({
     domain: {
         type: String,
         max: 300
@@ -17,16 +17,6 @@ LoginSchema = new SimpleSchema({
     }
 });
 
-Logins.allow({
-    update: function (userId) {
-        return isAdmin(userId);
-    },
-    insert: function (userId) {
-        return isAdmin(userId);
-    },
-    remove: function (userId) {
-        return isAdmin(userId);
-    }
-});
+Logins.allow(adminAllow('update insert remove'));
 
-Logins.attachSchema(LoginSchema);
+Logins.attachSchema(LoginsSchema);

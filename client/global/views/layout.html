@@ -14,6 +14,7 @@
                     {{#if currentUser}}
                         <li class="{{isActiveRoute regex='hosting'}}"><a href="{{pathFor 'hosting'}}">Files</a></li>
                         <li class="{{isActiveRoute regex='logins'}}"><a href="{{pathFor 'logins'}}">Logins</a></li>
+                        <li class="{{isActiveRoute regex='places'}}"><a href="{{pathFor 'places'}}">Places</a></li>
                         <li class="{{isActiveRoute regex='accounts'}}"><a href="{{pathFor 'accounts'}}">Accounts</a></li>
                     {{else}}
                         <li class="{{isActiveRoute 'login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
@@ -21,6 +22,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {{#if currentUser}}
+                        <li class="pull-right"><a id="logout">Logout</a></li>
                         <li class="{{isActiveRoute regex='profile'}} pull-right"><a href="{{pathFor 'profile'}}">Profile</a></li>
                     {{/if}}
                 </ul>

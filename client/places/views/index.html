@@ -1,0 +1,15 @@
+<template name="places">
+    <div class="row-grid">
+        <a href="{{pathFor 'places.add'}}" class="btn btn-default">
+            New place
+        </a>
+        <a href="{{pathFor 'places.categories'}}" class="btn btn-default">
+            Categories
+        </a>
+        <a href="{{pathFor 'places.categories.add'}}" class="btn btn-default">
+            New category
+        </a>
+    </div>
+
+    <div id="map" style="min-height: 300px; height: 100vh; max-height: 500px;"></div>
+</template>

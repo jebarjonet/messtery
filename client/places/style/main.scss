@@ -1,0 +1,71 @@
+// map and icons style
+.leaflet-div-icon {
+    background: transparent;
+    border: none;
+}
+
+.leaflet-container a {
+    color: inherit;
+}
+
+.leaflet-icon {
+    $transition-time: .2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    background-color: #bbb;
+    border-radius: 50%;
+    transition: color $transition-time, background-color $transition-time, opacity $transition-time;
+
+    * {
+        transition: color $transition-time, background-color $transition-time, opacity $transition-time;
+    }
+
+    .fa {
+        font-size: 1.7em;
+    }
+
+    &-xs {
+        width: 28px;
+        height: 28px;
+
+        .fa {
+            font-size: .9em;
+        }
+    }
+
+    &-marker {
+        cursor: pointer;
+        opacity: 0;
+        animation: appear $transition-time linear $transition-time forwards;
+
+        &::after {
+            $size: 20px;
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: $size;
+            height: $size;
+            z-index: -1;
+            background-color: inherit;
+            transform-origin: center;
+            transform: rotate(45deg) translate($size*6/10, - $size*4/10);
+
+            opacity: 0;
+            animation: appear $transition-time linear $transition-time forwards;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    }
+}

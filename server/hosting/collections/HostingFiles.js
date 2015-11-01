@@ -1,6 +1,6 @@
 HostingFiles = new Mongo.Collection("hostingfiles");
 
-HostingFileSchema = new SimpleSchema({
+HostingFilesSchema = new SimpleSchema({
     name: {
         type: String,
         max: 300
@@ -29,13 +29,6 @@ HostingFiles.before.insert(function (userId, doc) {
     doc.createdAt = Date.now();
 });
 
-HostingFiles.allow({
-    update: function (userId) {
-        return isAdmin(userId);
-    },
-    insert: function (userId) {
-        return isAdmin(userId);
-    }
-});
+HostingFiles.allow(adminAllow('update insert'));
 
-HostingFiles.attachSchema(HostingFileSchema);
+HostingFiles.attachSchema(HostingFilesSchema);

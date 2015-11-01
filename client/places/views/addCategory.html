@@ -1,0 +1,19 @@
+<template name="addCategoriesPlaces">
+    <h1>
+        Add a place category
+        <a class="btn btn-default pull-right" href="{{pathFor 'places.categories'}}"><i class="fa fa-arrow-left"></i>
+            Back to list</a>
+    </h1>
+
+    <div class="panel panel-default" style="display: inline-block;">
+        <div class="panel-heading">
+            <h3 class="panel-title">Preview</h3>
+        </div>
+        <div class="panel-body" style="text-align: center;">
+            <div class="leaflet-icon" style="background-color:{{category.color}};"><i
+                    class="fa fa-{{category.icon}}"></i></div>
+        </div>
+    </div>
+
+    {{>quickForm collection="PlacesCategories" schema="PlacesCategoriesForm" id="insertPlacesCategoriesForm" type="insert"}}
+</template>

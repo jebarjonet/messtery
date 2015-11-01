@@ -5,9 +5,7 @@ LoginForm = new SimpleSchema({
         autoform: {
             type: "email"
         },
-        custom: function() {
-            return validators.email(this.value);
-        }
+        custom: Validators.email
     },
     password: {
         type: String,

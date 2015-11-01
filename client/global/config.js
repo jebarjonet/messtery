@@ -14,6 +14,7 @@ ActiveRoute.configure({
 // Autoform hooks
 AutoForm.addHooks(null, {
     onError: function (m, err) {
+        console.error(err);
         if (err.reason) {
             notification(err.reason);
         }

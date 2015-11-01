@@ -32,3 +32,9 @@
     background: #EEEEEE;
     color: #AAAAAA;
 }
+
+.table {
+    &-vertical-middle > tbody > tr > td {
+        vertical-align: middle;
+    }
+}

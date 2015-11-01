@@ -1,0 +1,57 @@
+<template name="categoriesPlaces">
+    <div class="row-grid">
+        <a href="{{pathFor 'places.categories.add'}}" class="btn btn-default">
+            New category
+        </a>
+        <a class="btn btn-default pull-right" href="{{pathFor 'places'}}"><i class="fa fa-arrow-left"></i>
+            Back to map</a>
+    </div>
+
+    <table class="table table-hover table-vertical-middle">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Icon</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each this}}
+            <tr>
+                <td style="width: 32px;">
+                    <div class="leaflet-icon leaflet-icon-xs" style="background-color:{{color}};"><i
+                            class="fa fa-{{icon}}"></i></div>
+                </td>
+                <td>
+                    {{name}}
+                </td>
+                <td>
+                    {{color}}
+                </td>
+                <td>
+                    {{icon}}
+                </td>
+                <td>
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="update-action"><a><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+                            <li class="delete-action"><a><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    {{#if isEmpty this}}
+        <p class="text-muted">
+            There is no category for now.
+        </p>
+    {{/if}}
+</template>

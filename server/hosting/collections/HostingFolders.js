@@ -1,6 +1,6 @@
 HostingFolders = new Mongo.Collection("hostingfolders");
 
-HostingFolderSchema = new SimpleSchema({
+HostingFoldersSchema = new SimpleSchema({
     name: {
         type: String,
         max: 300
@@ -11,13 +11,6 @@ HostingFolderSchema = new SimpleSchema({
     }
 });
 
-HostingFolders.allow({
-    update: function (userId) {
-        return isAdmin(userId);
-    },
-    insert: function (userId) {
-        return isAdmin(userId);
-    }
-});
+HostingFolders.allow(adminAllow('update insert'));
 
-HostingFolders.attachSchema(HostingFolderSchema);
+HostingFolders.attachSchema(HostingFoldersSchema);

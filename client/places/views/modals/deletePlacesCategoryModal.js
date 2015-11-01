@@ -1,12 +1,12 @@
-Template.deleteAccountModal.events({
+Template.deletePlacesCategoryModal.events({
     'click button': function () {
-        Meteor.users.remove(this._id, function (err) {
+        PlacesCategories.remove(this._id, function (err) {
             if (err) {
                 notification(err.reason);
                 return;
             }
 
-            notification("Account deleted", "success");
+            notification("Category deleted", "success");
             Modal.hide();
         });
     }

@@ -1,0 +1,43 @@
+<template name="placesForm">
+    <h1>
+        {{formData.title}}
+        <a class="btn btn-default pull-right" href="{{pathFor 'places'}}"><i class="fa fa-arrow-left"></i>
+            Back to map</a>
+    </h1>
+
+    {{#unless hasCategories}}
+        <p class="text-danger">
+            There are no categories registered. Create at least one category to be able to create a place.
+            <a href="{{pathFor 'places.categories.add'}}">Add a category</a>
+        </p>
+    {{/unless}}
+
+    <div class="row-grid">
+        <div id="map" style="height: 150px;"></div>
+    </div>
+
+    {{#autoForm collection="Places" schema="PlacesForm" id=formData.id type=formData.type doc=formData.doc}}
+        {{> afQuickField name="name"}}
+        {{> afQuickField name="category"}}
+        {{> afQuickField name="text"}}
+
+        <div class="form-group{{#if afFieldIsInvalid name="address"}} has-error{{/if}}">
+            <div class="input-group">
+                {{> afFieldInput name="address"}}
+                <span class="input-group-btn">
+                    <button id="autocomplete" class="btn btn-default" type="button">Auto geolocation</button>
+                </span>
+            </div>
+            {{#if afFieldIsInvalid name="address"}}
+                <span class="help-block">{{afFieldMessage name="address"}}</span>
+            {{/if}}
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">{{> afQuickField name="lat"}}</div>
+            <div class="col-md-6">{{> afQuickField name="lng"}}</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {{/autoForm}}
+</template>

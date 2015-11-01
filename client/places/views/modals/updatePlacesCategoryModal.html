@@ -1,0 +1,29 @@
+<template name="updatePlacesCategoryModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        You are editing the category <b>{{name}}</b>
+                    </p>
+
+                    <div class="panel panel-default" style="display: inline-block;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Preview</h3>
+                        </div>
+                        <div class="panel-body" style="text-align: center;">
+                            <div class="leaflet-icon" style="background-color:{{category.color}};"><i
+                                    class="fa fa-{{category.icon}}"></i></div>
+                        </div>
+                    </div>
+
+                    {{> quickForm collection="PlacesCategories" schema="PlacesCategoriesForm" doc=this id="updatePlacesCategoriesForm" type="update"}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

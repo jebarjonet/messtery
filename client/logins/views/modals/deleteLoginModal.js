@@ -6,6 +6,7 @@ Template.deleteLoginModal.events({
                 return;
             }
 
+            notification("Login deleted", "success");
             Modal.hide();
         });
     }
