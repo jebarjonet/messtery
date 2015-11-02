@@ -5,11 +5,11 @@
         {{address}}
     </p>
 
-    {{#unless isEmpty text}}
+    {{#if text}}
         <p>
             {{nl2br text}}
         </p>
-    {{/unless}}
+    {{/if}}
 
     <div>
         <a class="btn btn-xs btn-default" href="{{pathFor route="places.edit" data=updateLinkData}}">

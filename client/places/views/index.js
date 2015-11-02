@@ -40,10 +40,17 @@ Template.places.helpers({
     },
     places: function () {
         return Places.find({
-            name: {
-                $regex: getCurrentSearchQuery(),
-                $options: "i"
-            }
+            $or: [{
+                name: {
+                    $regex: getCurrentSearchQuery(),
+                    $options: "i"
+                }
+            }, {
+                text: {
+                    $regex: getCurrentSearchQuery(),
+                    $options: "i"
+                }
+            }]
         });
     },
     category: function () {

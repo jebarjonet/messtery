@@ -1,13 +1,22 @@
 {
     "public": {
+        // Google API key
         "googleApiKey": "",
+        // Mapbox API public key + project ID
+        "mapBox": {
+            "id": "",
+            "token": ""
+        },
+        // file max size for upload (default 25Mb)
         "fileMaxSize": 26214400,
+        // center of the map (default Paris)
         "defaultMapCoordinates": {
             "lat": 48.856874,
             "lng": 2.336285
         }
     },
     "owner": {
+        // email address of owner of the service (needed to create first account)
         "emailAddress": ""
     }
 }

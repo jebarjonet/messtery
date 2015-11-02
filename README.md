@@ -4,6 +4,7 @@
 ## Content
 
 - [Technologies](#technologies)
+- [Needs](#needs)
 - [Installation](#installation)
 - [Uses](#uses)
 - [Features](#features)
@@ -11,6 +12,11 @@
 ## Technologies
 
 - [Meteor](https://meteor.com/)
+
+## Needs
+
+- **Google** : API public key
+- **Mapbox** : API public key + project ID
 
 ## Installation
 - Make sure you have installed Meteor

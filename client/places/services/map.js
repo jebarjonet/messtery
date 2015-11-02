@@ -7,7 +7,8 @@ MapService = {
     setMap: function (idMap, onLoad) {
         L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
         var map = L.map(idMap, {
-            attributionControl: false
+            attributionControl: false,
+            minZoom: 3
         });
 
         if (onLoad) {
@@ -16,8 +17,13 @@ MapService = {
             });
         }
 
-        map.setView([Meteor.settings.public.defaultMapCoordinates.lat, Meteor.settings.public.defaultMapCoordinates.lng], 12);
-        L.tileLayer.provider("OpenStreetMap.Mapnik").addTo(map);
+        map.setView([Meteor.settings.public.defaultMapCoordinates.lat, Meteor.settings.public.defaultMapCoordinates.lng], 13);
+
+        L.tileLayer.provider('MapBox', {
+            id: Meteor.settings.public.mapBox.id,
+            accessToken: Meteor.settings.public.mapBox.token
+        }).addTo(map);
+
         return map;
     },
     /**

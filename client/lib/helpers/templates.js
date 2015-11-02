@@ -28,6 +28,6 @@ Template.registerHelper('isEmpty', function (data) {
     }
 });
 
-Template.registerHelper('pluralize', function(value) {
+Template.registerHelper('pluralize', function (value) {
     return _.isNumber(value) && value > 1 ? 's' : '';
 });
