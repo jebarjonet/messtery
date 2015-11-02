@@ -24,3 +24,11 @@ AutoForm.addHooks('changePasswordForm', {
         notification('Your password has been updated', 'success');
     }
 });
+
+Template.profile.events({
+    'click .logout-clients-action': function () {
+        Meteor.logoutOtherClients(function () {
+            notification("All other clients are now disconnected", "success");
+        });
+    }
+});
