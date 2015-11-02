@@ -30,7 +30,7 @@ Template.placesForm.hooks({
         if (editedPlace) {
             MapService.markAndShow(editedPlace.lat, editedPlace.lng, map, draggableMarkerOptions);
         } else {
-            MapService.markAndShow(appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng, map, draggableMarkerOptions);
+            MapService.markAndShow(Meteor.settings.public.defaultMapCoordinates.lat, Meteor.settings.public.defaultMapCoordinates.lng, map, draggableMarkerOptions);
         }
 
         // mark place when changing lat or lng fields

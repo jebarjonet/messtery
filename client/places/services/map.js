@@ -16,7 +16,7 @@ MapService = {
             });
         }
 
-        map.setView([appConfig.defaultMapCoordinates.lat, appConfig.defaultMapCoordinates.lng], 12);
+        map.setView([Meteor.settings.public.defaultMapCoordinates.lat, Meteor.settings.public.defaultMapCoordinates.lng], 12);
         L.tileLayer.provider("OpenStreetMap.Mapnik").addTo(map);
         return map;
     },

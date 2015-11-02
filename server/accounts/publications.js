@@ -1,4 +1,7 @@
 Meteor.publish('accounts', function () {
+    if (!this.userId) {
+        return [];
+    }
     return [
         Meteor.users.find({}, {
             fields: {

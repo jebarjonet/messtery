@@ -48,7 +48,7 @@ function uploadFile(doc, cbSuccess, cbError) {
     var file = $('[name="file"]')[0].files[0];
     var reader = new FileReader();
 
-    if (file.size > appConfig.fileMaxSize) {
+    if (file.size > Meteor.settings.public.fileMaxSize) {
         cbError('The file is too big to be uploaded');
         return;
     }
