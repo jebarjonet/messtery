@@ -51,6 +51,10 @@ Template.places.helpers({
                     $options: "i"
                 }
             }]
+        }, {
+            sort: {
+                name: 1
+            }
         });
     },
     category: function () {
