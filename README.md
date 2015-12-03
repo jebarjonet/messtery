@@ -12,16 +12,25 @@
 ## Technologies
 
 - [Meteor](https://meteor.com/)
+- [Meteor Up](https://github.com/arunoda/meteor-up)
 
 ## Needs
 
 - **Google** : API public key
 - **Mapbox** : API public key + project ID
+- **Mailgun** or other mail sender/receiver provider : Domain registered on Mailgun for example
 
 ## Installation
 - Make sure you have installed Meteor
 - Copy `settings.json.dist` to `settings.json` and edit its content
+
+### Local
 - Run `meteor --settings settings.json`
+- Go to `/boot` to boot the app (will create the admin user)
+
+### Server with Meteor Up
+- Copy `mup.json.dist` to `mup.json` and edit its content
+- Deploy
 - Go to `/boot` to boot the app (will create the admin user)
 
 ## Uses
