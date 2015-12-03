@@ -16,7 +16,7 @@
 
 ## Needs
 
-- **Google** : API public key
+- **Google** : API public key (for API **Google Maps Geocoding API**)
 - **Mapbox** : API public key + project ID
 - **Mailgun** or other mail sender/receiver provider : Domain registered on Mailgun for example
 
