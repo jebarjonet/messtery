@@ -12,7 +12,7 @@
 ## Technologies
 
 - [Meteor](https://meteor.com/)
-- [Meteor Up](https://github.com/arunoda/meteor-up)
+- [Meteor Up](https://github.com/arunoda/meteor-up) if you want to deploy it
 
 ## Needs
 
@@ -23,6 +23,7 @@
 ## Installation
 - Make sure you have installed Meteor
 - Copy `settings.json.dist` to `settings.json` and edit its content
+- Follow **local** or **server** instructions below
 
 ### Local
 - Run `meteor --settings settings.json`
