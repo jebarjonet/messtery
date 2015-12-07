@@ -32,7 +32,7 @@
 
   // Configure environment
   "env": {
-    "ROOT_URL": "ROOT_URL",
+    "ROOT_URL": "ROOT_URL", // http://messtery.com
     "MAIL_URL": "MAIL_URL" // smtp://FIRST_PART_LOGIN_SMTP%SECOND_PART_LOGIN_SMTP:PASSWORD@smtp.mailgun.org:587
   },
 
