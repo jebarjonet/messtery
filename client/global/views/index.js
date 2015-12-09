@@ -19,7 +19,7 @@ Template.index.helpers({
             {
                 icon: "users",
                 title: "Accounts",
-                description: "Multiple users can have their own accounts and interact with owner data."
+                description: "Multiple users can have their own accounts and interact with their own data."
             }
         ];
     },
@@ -33,7 +33,7 @@ Template.index.helpers({
             {
                 icon: "legal",
                 title: "Roles",
-                description: "Users are limited in their actions by the roles the owner gave them."
+                description: "Users are limited in their actions to their own data. The admin only has the extra option of managing every users."
             },
             {
                 icon: "lock",

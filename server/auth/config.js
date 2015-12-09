@@ -7,7 +7,7 @@ Accounts.validateLoginAttempt(function (req) {
 
     // if user has been disabled
     if (req.user.disabled) {
-        throw new Meteor.Error(403, 'Your account has been disabled');
+        throw new Meteor.Error(403, "Your account has been disabled");
     }
 
     Meteor.users.update({

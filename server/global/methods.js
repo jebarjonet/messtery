@@ -35,6 +35,7 @@ Meteor.methods({
 
         HostingFolders.update(selector, update, options);
         HostingFiles.update(selector, update, options);
+        Files.update(selector, update, options);
         Logins.update(selector, update, options);
         Places.update(selector, update, options);
         PlacesCategories.update(selector, update, options);

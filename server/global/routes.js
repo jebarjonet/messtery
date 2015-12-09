@@ -3,5 +3,7 @@ Router.route('/boot', function () {
 }, {where: 'server'});
 
 Router.route('/migrate', function () {
+    disabledMethod();
+    
     this.response.end(Meteor.call('migrateV2'));
 }, {where: 'server'});
