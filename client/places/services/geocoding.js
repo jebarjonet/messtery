@@ -1,5 +1,14 @@
-GeocodingService = {
-    geocode: function (address, cb) {
+GeocodingService = (function () {
+    return {
+        geocode: geocode
+    };
+
+    /**
+     * Returns coordinates and formatted adress of passed address to a callback
+     * @param address
+     * @param cb
+     */
+    function geocode(address, cb) {
         if (!Meteor.settings.public.googleApiKey) {
             throw new Meteor.Error(403, "Google API key is needed in Meteor settings");
         }
@@ -24,4 +33,4 @@ GeocodingService = {
             cb(location);
         });
     }
-};
+})();

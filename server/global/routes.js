@@ -4,6 +4,6 @@ Router.route('/boot', function () {
 
 Router.route('/migrate', function () {
     disabledMethod();
-    
+
     this.response.end(Meteor.call('migrateV2'));
 }, {where: 'server'});

@@ -1,10 +1,18 @@
-MapService = {
+MapService = (function () {
+    return {
+        setMap: setMap,
+        marker: marker,
+        markAndShow: markAndShow,
+        getMarkersOnMap: getMarkersOnMap
+    };
+
     /**
      * Initialize a map at the passed id div
      * @param idMap
-     * @returns {*}
+     * @param onLoad
+     * @returns {Array}
      */
-    setMap: function (idMap, onLoad) {
+    function setMap(idMap, onLoad) {
         L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
         var map = L.map(idMap, {
             attributionControl: false,
@@ -25,7 +33,8 @@ MapService = {
         }).addTo(map);
 
         return map;
-    },
+    }
+
     /**
      * Return a marker at passed coordinates
      * @param coordinates ([lat, lng] Strings)
@@ -33,7 +42,7 @@ MapService = {
      * @param options
      * @returns {*}
      */
-    marker: function (coordinates, category, options) {
+    function marker(coordinates, category, options) {
         var defaultCategory = {
             color: '#222222',
             icon: 'circle'
@@ -69,7 +78,8 @@ MapService = {
         }
 
         return marker;
-    },
+    }
+
     /**
      * Place a marker on the map and move the view to it
      * @param lat
@@ -77,14 +87,14 @@ MapService = {
      * @param map
      * @param options
      */
-    markAndShow: function (lat, lng, map, options) {
+    function markAndShow(lat, lng, map, options) {
         // clear map
-        _.forEach(MapService.getMarkersOnMap(map), function (marker) {
+        _.forEach(getMarkersOnMap(map), function (marker) {
             map.removeLayer(marker);
         });
 
         // add new marker
-        MapService.marker([lat, lng], null, options).addTo(map);
+        marker([lat, lng], null, options).addTo(map);
 
         // set view
         map.setView([
@@ -96,10 +106,11 @@ MapService = {
                 animate: true
             }
         );
-    },
-    getMarkersOnMap: function (map) {
+    }
+
+    function getMarkersOnMap(map) {
         return _.omit(map._layers, function (layer) {
             return !layer._icon;
         });
     }
-};
+})();
