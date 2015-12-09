@@ -4,6 +4,10 @@ PlacesSchema = new SimpleSchema({
     name: {
         type: String
     },
+    owner: {
+        type: String,
+        optional: true
+    },
     category: {
         type: String
     },
@@ -22,6 +26,10 @@ PlacesSchema = new SimpleSchema({
     }
 });
 
-Places.allow(adminAllow('update insert remove'));
+Places.before.insert(function (userId, doc) {
+    doc.owner = userId;
+});
+
+Places.allow(ownerAllow('update insert remove'));
 
 Places.attachSchema(PlacesSchema);

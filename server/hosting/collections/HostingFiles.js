@@ -5,6 +5,10 @@ HostingFilesSchema = new SimpleSchema({
         type: String,
         max: 300
     },
+    owner: {
+        type: String,
+        optional: true
+    },
     createdAt: {
         type: Date,
         optional: true
@@ -26,9 +30,10 @@ HostingFilesSchema = new SimpleSchema({
 });
 
 HostingFiles.before.insert(function (userId, doc) {
+    doc.owner = userId;
     doc.createdAt = Date.now();
 });
 
-HostingFiles.allow(adminAllow('update insert'));
+HostingFiles.allow(ownerAllow('update insert'));
 
 HostingFiles.attachSchema(HostingFilesSchema);

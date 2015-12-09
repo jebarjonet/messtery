@@ -76,6 +76,7 @@ function uploadFile(doc, cbSuccess, cbError) {
 
 function saveResult(result, cbSuccess, cbError) {
     var FSFile = new FS.File(result);
+    FSFile.owner = Meteor.userId();
 
     Files.insert(FSFile, function (err, fileObj) {
         if (err) {

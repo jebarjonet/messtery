@@ -1,8 +1,10 @@
 <template name="accounts">
     <div class="row-grid">
+        {{#if isAdmin currentUser}}
         <a href="{{pathFor 'accounts.enroll'}}" class="btn btn-default">
             Enroll user
         </a>
+        {{/if}}
 
         <p class="pull-right">
             Currently {{usersCount}} user{{pluralize usersCount}}
@@ -18,60 +20,64 @@
             <th>Disabled</th>
             <th class="hidden-xs">Created</th>
             <th class="hidden-xs">Last connection</th>
+            {{#if isAdmin currentUser}}
             <th></th>
+            {{/if}}
         </tr>
         </thead>
         <tbody>
         {{#each this}}
-            <tr>
-                <td>
-                    {{#if isAdmin}}
-                        <span class="label label-primary">Admin</span>
-                    {{else}}
-                        <span class="label label-sober">User</span>
-                    {{/if}}
-                </td>
-                <td>{{emails.[0].address}}</td>
-                <td>
-                    {{#if isActivated}}
-                        <span class="label label-success">Yes</span>
-                    {{else}}
-                        <span class="label label-danger">No</span>
-                    {{/if}}
-                </td>
-                <td>
-                    {{#if isDisabled}}
-                        <span class="label label-danger">Yes</span>
-                    {{else}}
-                        <span class="label label-success">No</span>
-                    {{/if}}
-                </td>
-                <td class="hidden-xs">
-                    {{formatDate createdAt}}
-                </td>
-                <td class="hidden-xs">
-                    {{formatDate lastConnectionAt}}
-                </td>
-                <td>
-                    {{#unless isAdmin}}
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                Actions <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li class="disable-action"><a>
-                                    {{#if isDisabled}}
-                                        <i class="fa fa-fw fa-toggle-on"></i> Enable
-                                    {{else}}
-                                        <i class="fa fa-fw fa-toggle-off"></i> Disable
-                                    {{/if}}
-                                </a></li>
-                                <li class="delete-action"><a><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
-                            </ul>
-                        </div>
-                    {{/unless}}
-                </td>
-            </tr>
+        <tr>
+            <td>
+                {{#if isAdmin this._id}}
+                <span class="label label-primary">Admin</span>
+                {{else}}
+                <span class="label label-sober">User</span>
+                {{/if}}
+            </td>
+            <td>{{emails.[0].address}}</td>
+            <td>
+                {{#if isActivated}}
+                <span class="label label-success">Yes</span>
+                {{else}}
+                <span class="label label-danger">No</span>
+                {{/if}}
+            </td>
+            <td>
+                {{#if isDisabled}}
+                <span class="label label-danger">Yes</span>
+                {{else}}
+                <span class="label label-success">No</span>
+                {{/if}}
+            </td>
+            <td class="hidden-xs">
+                {{formatDate createdAt}}
+            </td>
+            <td class="hidden-xs">
+                {{formatDate lastConnectionAt}}
+            </td>
+            <td>
+                {{#if isAdmin currentUser}}
+                {{#unless isAdmin this}}
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        Actions <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="disable-action"><a>
+                            {{#if isDisabled}}
+                            <i class="fa fa-fw fa-toggle-on"></i> Enable
+                            {{else}}
+                            <i class="fa fa-fw fa-toggle-off"></i> Disable
+                            {{/if}}
+                        </a></li>
+                        <li class="delete-action"><a><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+                    </ul>
+                </div>
+                {{/unless}}
+                {{/if}}
+            </td>
+        </tr>
         {{/each}}
         </tbody>
     </table>

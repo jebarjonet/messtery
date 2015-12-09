@@ -12,11 +12,19 @@ LoginsSchema = new SimpleSchema({
     password: {
         type: String
     },
+    owner: {
+        type: String,
+        optional: true
+    },
     salt: {
         type: String
     }
 });
 
-Logins.allow(adminAllow('update insert remove'));
+Logins.before.insert(function (userId, doc) {
+    doc.owner = userId;
+});
+
+Logins.allow(ownerAllow('update insert remove'));
 
 Logins.attachSchema(LoginsSchema);

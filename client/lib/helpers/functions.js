@@ -29,8 +29,8 @@ formatBytes = function (bytes, decimals) {
 };
 
 // check if (current user or passed userId) is admin
-isAdmin = function (userId) {
-    var user = userId ? Meteor.users.findOne(userId) : Meteor.user();
+isAdmin = function (user_or_userId) {
+    var user = _.isObject(user_or_userId) ? user_or_userId : (user_or_userId ? Meteor.users.findOne(user_or_userId) : Meteor.user());
     return user && user.roles && _.includes(user.roles, 'admin');
 };
 

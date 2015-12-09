@@ -18,6 +18,6 @@ AutoForm.addHooks('boardingForm', {
     },
     onSuccess: function () {
         notification('Your account is now completed', 'success');
-        Router.go('login');
+        Router.go('hosting');
     }
 });

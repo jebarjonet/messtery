@@ -2,8 +2,8 @@ Template.accounts.helpers({
     usersCount: function () {
         return this.count();
     },
-    isAdmin: function () {
-        return isAdmin(this._id);
+    isAdmin: function (user) {
+        return isAdmin(user);
     },
     isActivated: function () {
         return isActivated(this);

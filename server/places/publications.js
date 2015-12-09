@@ -3,7 +3,11 @@ Meteor.publish('places', function () {
         return [];
     }
     return [
-        Places.find(),
-        PlacesCategories.find()
+        Places.find({
+            owner: this.userId
+        }),
+        PlacesCategories.find({
+            owner: this.userId
+        })
     ];
 });

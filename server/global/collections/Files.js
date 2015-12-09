@@ -1,11 +1,1 @@
-Files.allow({
-    update: function (userId) {
-        return isAdmin(userId);
-    },
-    insert: function (userId) {
-        return isAdmin(userId);
-    },
-    download: function (userId) {
-        return isAdmin(userId);
-    }
-});
+Files.allow(ownerAllow('update insert download'));

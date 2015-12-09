@@ -1,21 +1,29 @@
 Meteor.methods({
     // delete an object (folder or file) from database
     removeHostingObject: function (doc) {
+        onlyUsers();
+
+        // check ownership
+        var object = doc.isFolder ? HostingFolders.findOne(doc._id) : HostingFiles.findOne(doc._id);
+        if (object.owner !== Meteor.userId()) {
+            throw new Meteor.Error(403, "You can not delete something that is not yours");
+        }
+
         if (doc.isFolder) {
-            var children = findChildren(doc._id);
+            var children = findChildren(object._id);
 
             // recursively delete all folders in this folder
             var query = {$or: []};
             _.forEach(children.folders, function (folder) {
                 query.$or.push(folder._id);
             });
-            query.$or.push(doc._id);
+            query.$or.push(object._id);
             HostingFolders.remove(query);
 
             // recursively delete all files in this folder
             deleteFiles(children.files);
         } else {
-            deleteFiles(doc);
+            deleteFiles(object);
         }
     }
 });

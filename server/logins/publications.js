@@ -3,6 +3,8 @@ Meteor.publish('logins', function () {
         return [];
     }
     return [
-        Logins.find()
+        Logins.find({
+            owner: this.userId
+        })
     ];
 });
