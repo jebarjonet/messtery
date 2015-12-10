@@ -1,0 +1,40 @@
+<template name="nearbyPlaces">
+    <h1>
+        Nearby places
+    </h1>
+
+    <div class="row-grid">
+        <a class="btn btn-link" href="{{pathFor 'places'}}"><i class="fa fa-arrow-left"></i> Back to map</a>
+    </div>
+
+    <div class="row-grid">
+        <div id="map" style="height: 150px;"></div>
+    </div>
+
+    <p class="help-block">
+        {{#if geolocationAvailable}}
+            {{#if searchingLocation}}
+                Searching for your location...
+            {{else}}
+                <div class="row">
+                    <div class="col-sm-9">
+                        {{#if location}}
+                            Your position : <b>{{location.lat}}, {{location.lng}}</b>. Searching in a <b>150m</b> radius around you.
+                        {{else}}
+                            Your location is not available for now
+                        {{/if}}
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="retry-geolocation" class="btn btn-primary pull-right">Retry geolocation</button>
+                    </div>
+                </div>
+
+                {{#if location}}
+                    {{> listPlaces places}}
+                {{/if}}
+            {{/if}}
+        {{else}}
+            Geolocation is not supported by your browser
+        {{/if}}
+    </p>
+</template>

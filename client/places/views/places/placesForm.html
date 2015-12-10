@@ -1,9 +1,9 @@
 <template name="placesForm">
-    <h1>
-        {{formData.title}}
-        <a class="btn btn-default pull-right" href="{{pathFor 'places'}}"><i class="fa fa-arrow-left"></i>
-            Back to map</a>
-    </h1>
+    <h1>{{formData.title}}</h1>
+
+    <div class="row-grid">
+        <a class="btn btn-link" href="{{pathFor 'places'}}"><i class="fa fa-arrow-left"></i> Back to map</a>
+    </div>
 
     {{#unless hasCategories}}
         <p class="text-danger">

@@ -2,6 +2,17 @@ Router.map(function () {
     this.route('/places', {
         waitOn: sub
     });
+    this.route('/places/nearby', {
+        name: 'places.nearby',
+        waitOn: sub,
+        data: function () {
+            return Places.find({}, {
+                sort: {
+                    name: 1
+                }
+            });
+        }
+    });
     this.route('/places/add', {
         name: 'places.add',
         template: 'placesForm',

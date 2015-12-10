@@ -1,0 +1,41 @@
+<template name="listPlaces">
+    <table class="table table-hover table-vertical-middle">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th class="hidden-xs">Address</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each this}}
+        <tr>
+            <td style="width: 32px;">
+                {{#with category}}
+                <div class="leaflet-icon leaflet-icon-xs" style="background-color:{{color}};"><i
+                        class="fa fa-{{icon}}"></i></div>
+                {{/with}}
+            </td>
+            <td>
+                {{name}}
+            </td>
+            <td class="hidden-xs">
+                {{address}}
+            </td>
+            <td>
+                <a class="btn btn-xs btn-default" href="{{pathFor route='places.edit' data=updateLinkData}}">
+                    <i class="fa fa-fw fa-pencil"></i> Edit
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    {{#if isEmpty this}}
+    <p class="text-muted">
+        There is no place corresponding to your search.
+    </p>
+    {{/if}}
+</template>

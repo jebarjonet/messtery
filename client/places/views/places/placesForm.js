@@ -1,10 +1,12 @@
-var map, formData, draggableMarkerOptions = {
-    draggable: true,
-    onDrag: updateFormCoordinates
-};
+var map, formData, draggableMarkerOptions;
 
 Template.placesForm.hooks({
     created: function () {
+        draggableMarkerOptions = {
+            draggable: true,
+            onDrag: updateFormCoordinates
+        };
+
         var editedPlace = getEditedPlace();
         if (editedPlace) {
             formData = {

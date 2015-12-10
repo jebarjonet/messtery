@@ -29,9 +29,6 @@ Template.places.hooks({
 });
 
 Template.places.helpers({
-    updateLinkData: function () {
-        return {id: this._id};
-    },
     isSearching: function () {
         return getCurrentSearchQuery();
     },
@@ -56,9 +53,6 @@ Template.places.helpers({
                 name: 1
             }
         });
-    },
-    category: function () {
-        return PlacesCategories.findOne(this.category);
     },
     searchQuery: function () {
         return getCurrentSearchQuery();
