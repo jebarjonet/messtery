@@ -12,7 +12,7 @@
 ## Technologies
 
 - [Meteor](https://meteor.com/)
-- [Meteor Up](https://github.com/arunoda/meteor-up) if you want to deploy it
+- [Meteor Up X](https://github.com/arunoda/meteor-up/tree/mupx) if you want to deploy it
 
 ## Needs
 
@@ -31,12 +31,12 @@
 
 ### Server with Meteor Up
 - Copy `mup.json.dist` to `mup.json` and edit its content
-- Deploy
+- Deploy with Meteor Up X
 - Go to `/boot` to boot the app (will create the admin user)
 
 ## Uses
 ### Accounts
-Multiple users can have their own accounts and interact with owner data.
+Multiple users can have their own accounts and interact with their own data.
 
 ![accounts](https://cloud.githubusercontent.com/assets/4401230/10879491/96f1efc0-8154-11e5-9419-63be2f19b7fe.PNG)
 
@@ -73,7 +73,7 @@ The connected user can access its profile to use some basic functions such as pa
 The ability to invite new users by sending them a enrollment email.
 
 ### Roles
-Users are limited in their actions by the roles the owner gave them.
+Users are limited in their actions to their own data. The admin only has the extra option of managing every users.
 
 ### Encryption
 Each secured content is encrypted using a AES-256 algorithm with data unique salt + 128 bits user key, itself encrypted using user password, salt and IV.
