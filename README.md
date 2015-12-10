@@ -63,6 +63,10 @@ Places belong to categories that can also be edited.
 
 ![categories](https://cloud.githubusercontent.com/assets/4401230/10879508/b47d79c4-8154-11e5-8f21-63a46d5bc125.PNG)
 
+With the "search nearby" function you get the list of places around you
+
+![geo](https://cloud.githubusercontent.com/assets/4401230/11730889/4c9ae96a-9f98-11e5-990a-94af8d73afe8.png)
+
 ### Profile
 The connected user can access its profile to use some basic functions such as password update or multiple clients logout.
 
