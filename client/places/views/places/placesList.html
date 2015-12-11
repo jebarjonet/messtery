@@ -24,11 +24,40 @@
                 {{address}}
             </td>
             <td>
-                <a class="btn btn-xs btn-default" href="{{pathFor route='places.edit' data=updateLinkData}}">
+                <a class="btn btn-xs btn-default pull-right" href="{{pathFor route='places.edit' data=updateLinkData}}">
                     <i class="fa fa-fw fa-pencil"></i> Edit
                 </a>
             </td>
         </tr>
+
+        {{#if isSelected}}
+        <tr id="extended-description">
+            <td class="no-border"></td>
+            {{#if rwindow.screen 'eq' 'xsmall'}}
+            <td class="no-border" colspan="2">
+                <p>
+                    <b>Address</b> : {{address}}
+                </p>
+
+                {{#if text}}
+                <p>
+                    <b>Text</b> :
+                    {{nl2br text}}
+                </p>
+                {{/if}}
+            </td>
+            {{else}}
+            <td class="no-border" colspan="3">
+                {{#if text}}
+                <p>
+                    <b>Text</b> :
+                    {{nl2br text}}
+                </p>
+                {{/if}}
+            </td>
+            {{/if}}
+        </tr>
+        {{/if}}
         {{/each}}
         </tbody>
     </table>

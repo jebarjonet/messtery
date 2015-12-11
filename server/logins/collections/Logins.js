@@ -7,7 +7,8 @@ LoginsSchema = new SimpleSchema({
     },
     identifier: {
         type: String,
-        max: 300
+        max: 300,
+        optional: true
     },
     password: {
         type: String

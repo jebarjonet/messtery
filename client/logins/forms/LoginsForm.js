@@ -9,6 +9,7 @@ LoginsForm = new SimpleSchema({
     identifier: {
         type: String,
         max: 300,
+        optional: true,
         autoform: {
             autocomplete: "off"
         }

@@ -22,6 +22,10 @@ GeocodingService = (function () {
             var error = err ? err : res.data.error_message ? res.data.error_message : res.data.results.length ? undefined : res.data.status;
 
             if (error) {
+                if (error === "ZERO_RESULTS") {
+                    error = "No result found for this address";
+                }
+
                 notification(error);
                 return;
             }

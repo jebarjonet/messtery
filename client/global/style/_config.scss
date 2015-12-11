@@ -37,6 +37,10 @@
     &-vertical-middle > tbody > tr > td {
         vertical-align: middle;
     }
+
+    td.no-border, th.no-border {
+        border: none;
+    }
 }
 
 .btn {
