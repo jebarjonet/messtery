@@ -32,11 +32,7 @@
         {{#each logins}}
             <tr>
                 <td>{{domain}}</td>
-                {{#if identifier}}
-                    <td class="hidden-xs">{{identifier}}</td>
-                {{else}}
-                    <td class="hidden-xs text-muted"><i>no identifier</i></td>
-                {{/if}}
+                <td class="hidden-xs">{{identifier}}</td>
                 <td class="hidden-xs">********</td>
                 <td>
                     <div class="btn-group pull-right">

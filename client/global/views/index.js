@@ -41,5 +41,14 @@ Template.index.helpers({
                 description: "Each secured content is encrypted using a AES-256 algorithm with data unique salt + 128 bits user key, itself encrypted using user password, salt and IV."
             }
         ];
+    },
+    forgetSessionKeysDisabled: function () {
+        return EncryptionService.getSessionKeys() ? '' : 'disabled';
+    }
+});
+
+Template.index.events({
+    'click #forget-session-keys': function () {
+        EncryptionService.forgetSessionKeys();
     }
 });

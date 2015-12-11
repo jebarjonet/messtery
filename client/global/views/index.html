@@ -1,9 +1,20 @@
 <template name="index">
+    {{#if currentUser}}
+    <div class="row-grid" style="margin-top: 15px;">
+        <a href="{{pathFor 'places.nearby'}}" class="btn btn-primary">
+            Nearby places
+        </a>
+        <button id="forget-session-keys" class="btn btn-default pull-right" {{forgetSessionKeysDisabled}}>
+            Forget keys
+        </button>
+    </div>
+    {{/if}}
+
     <h1>Uses</h1>
 
     <div class="row">
         {{#each uses}}
-            {{> featureIndex}}
+        {{> featureIndex}}
         {{/each}}
     </div>
 
@@ -11,7 +22,7 @@
 
     <div class="row">
         {{#each features}}
-            {{> featureIndex}}
+        {{> featureIndex}}
         {{/each}}
     </div>
 </template>
