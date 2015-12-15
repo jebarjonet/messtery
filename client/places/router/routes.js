@@ -4,7 +4,14 @@ Router.map(function () {
     });
     this.route('/places/nearby', {
         name: 'places.nearby',
-        waitOn: sub
+        waitOn: sub,
+        onAfterAction: function () {
+            SEO.set({
+                link: {
+                    manifest: '/manifests/nearby.json'
+                }
+            });
+        }
     });
     this.route('/places/add', {
         name: 'places.add',
