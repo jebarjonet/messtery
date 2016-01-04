@@ -3,7 +3,9 @@ Meteor.publish('hosting', function () {
         return [];
     }
     return [
-        Files.find(),
+        Files.find({
+            owner: this.userId
+        }),
         HostingFiles.find({
             owner: this.userId
         }),

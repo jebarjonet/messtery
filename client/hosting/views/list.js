@@ -15,26 +15,7 @@ Template.listHosting.events({
         var url = this.file.url();
 
         EncryptionService.needSessionKeys(function () {
-            var downloadNotification = notification('Downloading...', 'info', {timeout: 'none'});
-            HTTP.get(url, {}, function (err, result) {
-                sAlert.close(downloadNotification);
-                if (err) {
-                    return;
-                }
-
-                var decryptNotification = notification('Decrypting... Please wait', 'warning', {timeout: 'none'});
-
-                // long JS action freezing other JS scripts
-                Meteor.setTimeout(function () {
-                    var decrypted = EncryptionService.decryptFile(result.content, self.salt);
-                    sAlert.close(decryptNotification);
-
-                    if (decrypted) {
-                        // FileSaver.js giving the file to user
-                        saveAs(decrypted, self.name);
-                    }
-                }, 500);
-            });
+            FileManipulationService.downloadEncryptedFile(url, self.salt, self.name);
         });
     },
     'click .information-action': function () {
