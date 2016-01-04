@@ -1,6 +1,10 @@
 # Messtery
 **A dashboard to manage personal and sensitive data that are hard to remember and lost among papers on the desk**
 
+Note that this webapp is appcapable and can be added to your smartphone as an app :
+
+![appcapable](https://cloud.githubusercontent.com/assets/4401230/11836139/f2f300ba-a3d8-11e5-9f1c-355036d8f0ef.PNG)
+
 ## Content
 
 - [Technologies](#technologies)
@@ -8,6 +12,7 @@
 - [Installation](#installation)
 - [Uses](#uses)
 - [Features](#features)
+- [App capable](#app-capable)
 
 ## Technologies
 
@@ -81,3 +86,14 @@ Users are limited in their actions to their own data. The admin only has the ext
 
 ### Encryption
 Each secured content is encrypted using a AES-256 algorithm with data unique salt + 128 bits user key, itself encrypted using user password, salt and IV.
+
+## App capable
+There are currently 2 distinct pages that are appcapable on Messtery. The **nearby** function is one of them. Any other page added as appcapable on your phone will send you to the **logins** page.
+
+![appcapable](https://cloud.githubusercontent.com/assets/4401230/11836139/f2f300ba-a3d8-11e5-9f1c-355036d8f0ef.PNG)
+
+To add a page to your smartphone as an app, simply navigate on Messtery with your browser (Chrome, Safari or Firefox), open the menu and add it to the home screen.
+
+*On the left : a French version of Chrome on Android. On the right : a US version of Safari on iOS*
+
+![tuto](https://cloud.githubusercontent.com/assets/4401230/11836320/317619a2-a3da-11e5-88e4-185dfaa8efb0.PNG)
