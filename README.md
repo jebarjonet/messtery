@@ -1,4 +1,6 @@
 # Messtery
+**/!\ The current code of this repo is based on Meteor 1.2 when I was learning Meteor and is therefore pretty poorly coded**
+
 **A dashboard to manage personal and sensitive data that are hard to remember and lost among papers on the desk**
 
 Note that this webapp is appcapable and can be added to your smartphone as an app :
