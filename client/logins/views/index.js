@@ -1,3 +1,7 @@
+Template.logins.onCreated(function() {
+    this.subscribe('logins');
+});
+
 Template.logins.helpers({
     logins: function () {
         var query = {};
@@ -29,9 +33,9 @@ Template.logins.events({
     'submit form[name="search"]': function (e) {
         e.preventDefault();
         if (!getFormSearchQuery()) {
-            Router.go('logins');
+            FlowRouter.go('logins');
         } else {
-            Router.go('logins', {}, {
+            FlowRouter.go('logins', {}, {
                 query: 's=' + getFormSearchQuery()
             });
         }
@@ -73,5 +77,5 @@ function getFormSearchQuery() {
 }
 
 function getCurrentSearchQuery() {
-    return Router.current().params.query.s;
+    return FlowRouter.getQueryParam("s");
 }

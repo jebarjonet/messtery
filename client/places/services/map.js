@@ -95,7 +95,7 @@ MapService = (function () {
 
         // add new marker
         marker([lat, lng], null, options).addTo(map);
-
+    
         // set view
         map.setView([
                 parseFloat(lat),

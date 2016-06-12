@@ -1,3 +1,7 @@
+Template.addFileHosting.onCreated(function() {
+    this.subscribe('hosting');
+});
+
 Template.addFileHosting.helpers({
     previousFolderAsObject: function () {
         return getParentFolder() ? {f: getParentFolder()} : {};
@@ -30,16 +34,16 @@ AutoForm.addHooks('insertHostingFilesForm', {
             notification('Sending file', 'info');
         }
         if (getParentFolder()) {
-            Router.go('hosting', {}, {
-                query: 'f=' + getParentFolder()
+            FlowRouter.go('hosting', {}, {
+                f: getParentFolder()
             });
         } else {
-            Router.go('hosting');
+            FlowRouter.go('hosting');
         }
     }
 });
 
 function getParentFolder() {
-    var parentFolder = Router.current().params.query.f;
+    var parentFolder = FlowRouter.getQueryParam("f");
     return parentFolder ? parentFolder : undefined;
 }

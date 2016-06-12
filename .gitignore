@@ -1,4 +1,5 @@
 .idea
 backup/
 mup.json
+mup.previous.json
 settings.json

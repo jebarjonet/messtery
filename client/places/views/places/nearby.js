@@ -1,5 +1,9 @@
 var location, searchingLocation;
 
+Template.nearbyPlaces.onCreated(function() {
+    this.subscribe('places');
+});
+
 Template.nearbyPlaces.hooks({
     created: function () {
         location = new ReactiveVar();

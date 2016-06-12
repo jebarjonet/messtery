@@ -1,5 +1,9 @@
 var map, formData, draggableMarkerOptions;
 
+Template.placesForm.onCreated(function() {
+    this.subscribe('places');
+});
+
 Template.placesForm.hooks({
     created: function () {
         draggableMarkerOptions = {
@@ -71,19 +75,20 @@ Template.placesForm.events({
 AutoForm.addHooks('insertPlacesForm', {
     onSuccess: function () {
         notification('Place added to list', 'success');
-        Router.go('places');
+        FlowRouter.go('places');
     }
 });
 
 AutoForm.addHooks('updatePlacesForm', {
     onSuccess: function () {
         notification('Place updated', 'success');
-        Router.go('places');
+        FlowRouter.go('places');
     }
 });
 
 function getEditedPlace() {
-    return Router.current().params.id && Places.findOne(Router.current().params.id);
+    var id = FlowRouter.getParam("id");
+    return id && Places.findOne(id);
 }
 
 function updateFormCoordinates(e) {

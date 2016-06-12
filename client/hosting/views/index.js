@@ -1,3 +1,7 @@
+Template.hosting.onCreated(function() {
+    this.subscribe('hosting'); 
+});
+
 Template.hosting.helpers({
     breadcrumbs: function () {
         return generateBreadcrumbs(getCurrentFolder());
@@ -67,9 +71,9 @@ Template.hosting.events({
     'submit form[name="search"]': function (e) {
         e.preventDefault();
         if (!getFormSearchQuery()) {
-            Router.go('hosting');
+            FlowRouter.go('hosting');
         } else {
-            Router.go('hosting.search', {
+            FlowRouter.go('hosting.search', {
                 terms: getFormSearchQuery()
             });
         }
@@ -80,7 +84,7 @@ Template.hosting.events({
 });
 
 function getCurrentFolder() {
-    return Router.current().params.query.f;
+    return FlowRouter.getQueryParam("f");
 }
 
 function generateBreadcrumbs(folderId, breadcrumbs) {
@@ -98,7 +102,7 @@ function generateBreadcrumbs(folderId, breadcrumbs) {
 }
 
 function isSearching() {
-    return Router.current().route.getName() === 'hosting.search';
+    return FlowRouter.getRouteName() === 'hosting.search';
 }
 
 function getFormSearchQuery() {
@@ -106,5 +110,5 @@ function getFormSearchQuery() {
 }
 
 function getCurrentSearchQuery() {
-    return isSearching() && Router.current().params.terms;
+    return isSearching() && FlowRouter.getParam("terms");
 }

@@ -31,3 +31,7 @@ Template.registerHelper('isEmpty', function (data) {
 Template.registerHelper('pluralize', function (value) {
     return _.isNumber(value) && value > 1 ? 's' : '';
 });
+
+Template.registerHelper("getCount", function (cursor) {
+    return _.isFunction(cursor.count) && cursor.count();
+});

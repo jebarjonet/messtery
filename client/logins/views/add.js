@@ -8,6 +8,6 @@ AutoForm.addHooks('insertLoginsForm', {
     },
     onSuccess: function () {
         notification('Login added to list', 'success');
-        Router.go('logins');
+        FlowRouter.go('logins');
     }
 });

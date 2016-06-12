@@ -31,11 +31,7 @@ meteorhacks:aggregate
 email
 cfs:standard-packages
 aldeed:autoform
-iron:router
-multiply:iron-router-progress
 zimme:active-route
-zimme:iron-router-auth
-manuelschoebel:ms-seo
 aldeed:template-extension
 accounts-base
 accounts-password
@@ -54,3 +50,7 @@ cfs:ejson-file
 bevanhunt:leaflet
 hausor:autoform-bs-minicolors
 gadicohen:reactive-window
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+tomwasd:flow-router-seo

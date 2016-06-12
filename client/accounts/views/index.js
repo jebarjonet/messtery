@@ -1,6 +1,14 @@
+Template.accounts.onCreated(function () {
+    this.subscribe("accounts");
+});
+
 Template.accounts.helpers({
-    usersCount: function () {
-        return this.count();
+    accounts: function () {
+        return Meteor.users.find({}, {
+            sort: {
+                createdAt: 1
+            }
+        });
     },
     isAdmin: function (user) {
         return isAdmin(user);

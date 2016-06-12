@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#each this}}
+        {{#each categories}}
             <tr>
                 <td style="width: 32px;">
                     <div class="leaflet-icon leaflet-icon-xs" style="background-color:{{color}};"><i
@@ -48,7 +48,7 @@
         </tbody>
     </table>
 
-    {{#if isEmpty this}}
+    {{#if isEmpty categories}}
         <p class="text-muted">
             There is no category for now.
         </p>

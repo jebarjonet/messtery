@@ -2,30 +2,34 @@ var map;
 // track if map is loaded (map does not load correctly if it loads while being "display: none" during search)
 var mapLoaded = new ReactiveVar(false);
 
-Template.places.hooks({
-    created: function () {
-        mapLoaded.set(false);
-    },
-    rendered: function () {
-        // create map
-        map = MapService.setMap('map', function () {
-            mapLoaded.set(true);
-        });
+Template.places.onCreated(function () {
+    this.subscribe('places');
+    mapLoaded.set(false);
+});
 
-        // observe places to put on map
-        Places.find().observe({
-            added: function (place) {
-                addPlace(place);
-            },
-            changed: function (newPlace, oldPlace) {
-                removePlace(oldPlace);
-                addPlace(newPlace);
-            },
-            removed: function (oldPlace) {
-                removePlace(oldPlace);
-            }
-        });
-    }
+Template.places.onRendered(function () {
+    // create map
+    map = MapService.setMap('map', function () {
+        mapLoaded.set(true);
+    });
+
+    this.autorun(function () {
+        if (this.subscriptionsReady()) {
+            // observe places to put on map
+            Places.find().observe({
+                added: function (place) {
+                    addPlace(place);
+                },
+                changed: function (newPlace, oldPlace) {
+                    removePlace(oldPlace);
+                    addPlace(newPlace);
+                },
+                removed: function (oldPlace) {
+                    removePlace(oldPlace);
+                }
+            });
+        }
+    }.bind(this));
 });
 
 Template.places.helpers({
@@ -56,6 +60,9 @@ Template.places.helpers({
     },
     searchQuery: function () {
         return getCurrentSearchQuery();
+    },
+    subsReady: function () {
+        return Template.instance().subscriptionsReady();
     }
 });
 
@@ -63,10 +70,10 @@ Template.places.events({
     'submit form[name="search"]': function (e) {
         e.preventDefault();
         if (!getFormSearchQuery()) {
-            Router.go('places');
+            FlowRouter.go('places');
         } else {
-            Router.go('places', {}, {
-                query: 's=' + getFormSearchQuery()
+            FlowRouter.go('places', {}, {
+                s: getFormSearchQuery()
             });
         }
     }
@@ -98,5 +105,5 @@ function getFormSearchQuery() {
 }
 
 function getCurrentSearchQuery() {
-    return Router.current().params.query.s;
+    return FlowRouter.getQueryParam("s");
 }

@@ -7,7 +7,7 @@
         {{/if}}
 
         <p class="pull-right">
-            Currently {{usersCount}} user{{pluralize usersCount}}
+            Currently {{getCount accounts}} user{{pluralize (getCount accounts)}}
         </p>
     </div>
 
@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#each this}}
+        {{#each accounts}}
         <tr>
             <td>
                 {{#if isAdmin this._id}}

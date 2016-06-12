@@ -3,7 +3,7 @@ AutoForm.addHooks('boardingForm', {
         var self = this;
         this.event.preventDefault();
 
-        var token = Router.current().params.token;
+        var token = FlowRouter.getParam("token");
         var encryption = EncryptionService.setupUserEncryptionInfo(doc.password);
 
         Meteor.call('registerUser', token, encryption, function (err) {
@@ -18,6 +18,6 @@ AutoForm.addHooks('boardingForm', {
     },
     onSuccess: function () {
         notification('Your account is now completed', 'success');
-        Router.go('hosting');
+        FlowFlowRouter.go('hosting');
     }
 });

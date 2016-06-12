@@ -1,3 +1,7 @@
+Template.listHosting.onCreated(function() {
+    this.subscribe('hosting');
+});
+
 Template.listHosting.helpers({
     nextFolderAsObject: function () {
         return {

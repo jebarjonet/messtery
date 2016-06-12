@@ -1,3 +1,7 @@
+Template.addFolderHosting.onCreated(function() {
+    this.subscribe('hosting');
+});
+
 Template.addFolderHosting.helpers({
     previousFolderAsObject: function () {
         return getParentFolder() ? {f: getParentFolder()} : {};
@@ -16,16 +20,16 @@ AutoForm.addHooks('insertHostingFoldersForm', {
     onSuccess: function() {
         notification('Folder created', 'success');
         if(getParentFolder()) {
-            Router.go('hosting', {}, {
-                query: 'f=' + getParentFolder()
+            FlowRouter.go('hosting', {}, {
+                f: getParentFolder()
             });
         } else {
-            Router.go('hosting');
+            FlowRouter.go('hosting');
         }
     }
 });
 
 function getParentFolder() {
-    var parentFolder = Router.current().params.query.f;
+    var parentFolder = FlowRouter.getQueryParam("f");
     return parentFolder ? parentFolder : undefined;
 }

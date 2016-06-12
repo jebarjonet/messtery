@@ -8,6 +8,6 @@ AutoForm.addHooks('loginForm', {
         });
     },
     onSuccess: function () {
-        Router.go('index');
+        FlowFlowRouter.go('index');
     }
 });

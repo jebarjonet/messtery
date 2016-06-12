@@ -1,8 +1,8 @@
 Template.layout.events({
     'click #logout': function() {
-        Router.go('index');
         EncryptionService.forgetSessionKeys();
         Meteor.logout();
+        FlowFlowRouter.go('index');
     }
 });
 

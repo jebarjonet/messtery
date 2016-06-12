@@ -1,3 +1,7 @@
+Template.addCategoriesPlaces.onCreated(function() {
+    this.subscribe('places');
+});
+
 Template.addCategoriesPlaces.helpers({
     category: function () {
         return {
@@ -10,6 +14,6 @@ Template.addCategoriesPlaces.helpers({
 AutoForm.addHooks('insertPlacesCategoriesForm', {
     onSuccess: function () {
         notification('Category added to list', 'success');
-        Router.go('places.categories');
+        FlowRouter.go('places.categories');
     }
 });

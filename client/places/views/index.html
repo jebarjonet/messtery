@@ -22,10 +22,12 @@
         </a>
     </div>
 
-    {{#if isSearching}}
-    {{> listPlaces places}}
+    {{#if subsReady}}
+        {{#if isSearching}}
+            {{> listPlaces places}}
+        {{/if}}
     {{/if}}
 
-    <div id="map"
-         style="min-height: 300px; height: 100vh; max-height: 700px;{{#if isSearchingAndLoaded}}display: none;{{/if}}"></div>
+        <div id="map"
+             style="min-height: 300px; height: 100vh; max-height: 700px;{{#if isSearchingAndLoaded}}display: none;{{/if}}"></div>
 </template>
